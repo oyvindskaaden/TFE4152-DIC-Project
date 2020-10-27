@@ -1,0 +1,37 @@
+* This is a parametrized testbench for your pixel circuit array
+
+* You should at least test your circuit with:
+*	- current of 50 pA and exposure time 30 ms
+*	- current of 750 pA and exposure time 2 ms
+
+* Instructions
+* Connect EXPOSE, ERASE, NRE_R1 and NRE_R2 at the right place
+* Run a transient simulation with length 60 ms
+* Make sure outputs of pixel circuits to ADC are called OUT1 and OUT2
+* Make plots of output voltages to ADC (here called OUT1 and OUT2)
+* The voltage across internal capacitor (any pixel) is also of interest (here called OUT_SAMPLED1)
+* You should also plot the control signals EXPOSE, NRE_R1, NRE_R2 and ERASE
+
+.param Ipd_1 = 750p ! Photodiode current, range [50 pA, 750 pA]
+.param VDD = 1.8 ! Supply voltage
+.param EXPOSURETIME = 2m ! Exposure time, range [2 ms, 30 ms]
+
+.param TRF = {EXPOSURETIME/100} ! Risetime and falltime of EXPOSURE and ERASE signals
+.param PW = {EXPOSURETIME} ! Pulsewidth of EXPOSURE and ERASE signals
+.param PERIOD = {EXPOSURETIME*10} ! Period for testbench sources
+.param FS = 1k; ! Sampling clock frequency 
+.param CLK_PERIOD = {1/FS} ! Sampling clock period
+.param EXPOSE_DLY = {CLK_PERIOD} ! Delay for EXPOSE signal
+.param NRE_R1_DLY = {2*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R1 signal
+.param NRE_R2_DLY = {4*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R2 signal
+.param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
+
+VDD 1 0 dc VDD
+VEXPOSE EXPOSE 0 dc 0 pulse(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
+VERASE ERASE 0 dc 0 pulse(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
+VNRE_R1 NRE_R1 0 dc 0 pulse(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
+VNRE_R2 NRE_R2 0 dc 0  pulse(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
+
+.plot V(OUT1) V(OUT2) ! signals going to ADC
+.plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
+.plot V(OUT_SAMPLED1)
