@@ -1,0 +1,69 @@
+! Pixel cicuit
+! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
+! Output: OUT
+
+.subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT
+!!!!!!!!!!!!!!!!!!!
+!!!!! Factors !!!!!
+!!!!!!!!!!!!!!!!!!!
+.param  L       = 0.4u  ! Standard gate length
+.param  WL1     = 3     ! M1 NMOS gate width factor
+.param  WL2     = 3     ! M2 NMOS gate width factor
+.param  WL3     = 3     ! M3 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
+.param  WL4     = 3     ! M4 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
+
+! Convertion between NMOS and PMOS
+.param NtoPMOS  = 3
+
+! Actual lengths
+.param W1   = {WL1 * L}             ! M1, NMOS
+.param W2   = {WL2 * L}             ! M2, NMOS
+.param W3   = {WL3 * L * NtoPMOS}   ! M3, PMOS
+.param W4   = {WL4 * L * NtoPMOS}   ! M4, PMOS
+
+
+!!!!!!!!!!!!!!!!!!!!
+!!!!! Includes !!!!!
+!!!!!!!!!!!!!!!!!!!!
+
+! Photodiode
+.include ./photodiode.cir
+! Transistors
+.include ./p18_model_card.inc
+.include ./p18_cmos_models_tt.inc
+
+
+!!!!!!!!!!!!!!!!!!!!!!
+!!!!! Photodiode !!!!!
+!!!!!!!!!!!!!!!!!!!!!!
+XPD Vdd N1 PhotoDiode
+
+
+!!!!!!!!!!!!!!!!!!
+!!!!! Expose !!!!!
+!!!!!!!!!!!!!!!!!!
+M1 N1 EXPOSE N2 Vss NMOS L=L W=W1
+
+
+!!!!!!!!!!!!!!!!!!!
+!!!!! N2 Node !!!!!
+!!!!!!!!!!!!!!!!!!!
+
+! Erase part
+M2 N2 ERASE Vss Vss NMOS L=L W=W2
+
+! Sampleling caps
+CS N2 Vss 1pf
+
+! M3 Transistor
+M3 Vss N2 N3 Vdd PMOS L=L W=W3
+
+
+!!!!!!!!!!!!!!!!!!!
+!!!!! N3 Node !!!!!
+!!!!!!!!!!!!!!!!!!!
+
+! Out transistor
+M4 N3 NRE Out Vdd PMOS L=L W=W4
+
+.ends
