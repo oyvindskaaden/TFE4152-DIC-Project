@@ -1,4 +1,4 @@
-time (time)	time (time)	v(expose) (voltage)	v(erase) (voltage)	v(nre_r1) (voltage)	v(out_sampled1) (voltage)	v(out1) (voltage)
+%time (time)	time (time)	v(expose) (voltage)	v(erase) (voltage)	v(nre_r1) (voltage)	v(out_sampled1) (voltage)	v(out1) (voltage)
 0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	1.800000e+00	1.047349e-02	1.599070e+00
 5.000000e-08	5.000000e-08	0.000000e+00	0.000000e+00	1.800000e+00	1.047339e-02	1.599070e+00
 1.000000e-07	1.000000e-07	0.000000e+00	0.000000e+00	1.800000e+00	1.047329e-02	1.599070e+00
