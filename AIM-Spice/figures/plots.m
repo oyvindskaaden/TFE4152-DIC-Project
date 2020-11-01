@@ -16,7 +16,6 @@ axis([0 12 -0.5 2]);
 grid;
 ylabel('V_{erease} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
-title('Node voltages at I_{D} = 750pA and T_{exp} = 2ms', 'fontsize', 18);
 
 subplot(5, 1, 2);
 plot(t*1e3, v_expose, 'r', 'linewidth', 1.5);
