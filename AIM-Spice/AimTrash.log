@@ -7,8 +7,8 @@
                  *                                           *
                  *********************************************
 
-	Date: Sun Nov  1 18:56:26 2020
-	Circuit File: Z:\home\oyvind\repos\TFE4152-DIC-Project\AIM-Spice\Testbench.cir
+	Date: Sun Nov  1 17:50:51 2020
+	Circuit File: Z:\home\oyvind\repos\TFE4152-DIC-Project\AIM-Spice\AimTrash.cir
 	Analysis: Transient
 
 **************************  Circuit Description  **************************
@@ -42,17 +42,17 @@
     27:  .param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
     28:  
     29:  VDD 1 0 dc VDD
-    30:  VEXPOSE EXPOSE 0 dc 0 PULSE(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
-    31:  VERASE ERASE 0 dc 0 PULSE(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
-    32:  VNRE_R1 NRE_R1 0 dc 0 PULSE(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
-    33:  !VNRE_R2 NRE_R2 0 dc 0  PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
+    30:  VEXPOSE EXPOSE 0 PULSE(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
+    31:  VERASE ERASE 0 PULSE(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
+    32:  VNRE_R1 NRE_R1 0 PULSE(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
+    33:  !VNRE_R2 NRE_R2 0 PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
     34:  
     35:  *include ./Pixel.cir
     36:  ! Pixel cicuit
     37:  ! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
     38:  ! Output: OUT
     39:  
-    40:  .subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2
+    40:  .subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT
     41:  !!!!!!!!!!!!!!!!!!!
     42:  !!!!! Factors !!!!!
     43:  !!!!!!!!!!!!!!!!!!!
@@ -290,14 +290,18 @@
    275:  .ends
    276:  *end of: ./Pixel.cir
    277:  
-   278:  XP1 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL
+   278:  XP1 1 0 EXPOSE ERASE NRE_R1 OUT1 PIXEL
    279:  
-   280:  .tran 5u 12m 0 10u
-   281:  
-   282:  !.plot V(OUT1) !V(OUT2) ! signals going to ADC
-   283:  .plot V(EXPOSE) V(NRE_R1) V(ERASE) !V(NRE_R2) V(ERASE)
-   284:  .plot V(OUT1) V(OUT_SAMPLED1)
-   285:  
+   280:  !Vtest 30 0 PULSE(0 1 1S 0.1S 0.4S 0.5S 2S)
+   281:  !R1 30 0 100
+   282:  
+   283:  !.plot V(R1)
+   284:  
+   285:  .plot V(OUT1) !V(OUT2) ! signals going to ADC
+   286:  .plot V(EXPOSE) V(NRE_R1) V(ERASE) !V(NRE_R2) V(ERASE)
+   287:  !.plot V(OUT_SAMPLED1)
+   288:  
+   289:  .tran 1u 50m uic 
 
 ***************************  Model Parameters  ****************************
 
@@ -308,11 +312,9 @@
 
 **************************  Analysis Parameters  **************************
 
-	Stepsize ............ : 5u
-	Final time .......... : 12m
-	Display start time .. : 0
-	Maximum step size ... : 10u
-	Use Initial Conditions: Off
+	Stepsize ............ : 1u
+	Final time .......... : 50m
+	Use Initial Conditions: On
 
 
 
@@ -322,19 +324,19 @@
 
 *************************  Simulation Statistics  *************************
 
-	Total number of iterations.....................: 2754
-	Number of iterations for transient analysis....: 2724
-	Total number of timepoints.....................: 1286
-	Number of timepoints accepted..................: 1274
-	Number of timepoints rejected..................: 12
-	Total analysis time (sec)......................: 4.771
-	Transient analysis time (sec)..................: 4.727
-	Time spent in device loading (sec).............: 4.353
-	Time spent in L-U decomposition (sec)..........: 0.065
+	Total number of iterations.....................: 1456
+	Number of iterations for transient analysis....: 1456
+	Total number of timepoints.....................: 445
+	Number of timepoints accepted..................: 406
+	Number of timepoints rejected..................: 39
+	Total analysis time (sec)......................: 2.066
+	Transient analysis time (sec)..................: 2.065
+	Time spent in device loading (sec).............: 1.928
+	Time spent in L-U decomposition (sec)..........: 0.033
 	Time spent in matrix reordering (sec)..........: 0
-	Time spent in matrix solving (sec).............: 0.078
-	Time spent in transient L-U decomposition (sec): 0.065
-	Time spent in transient matrix solving (sec)...: 0.077
+	Time spent in matrix solving (sec).............: 0.04
+	Time spent in transient L-U decomposition (sec): 0.033
+	Time spent in transient matrix solving (sec)...: 0.04
 
 ***************************  Kernel Messages  *****************************
 
@@ -350,5 +352,11 @@ Warning: Pd = 0 is less than W for m:p1:4 in model p1:pmos.
 Warning: Ps = 0 is less than W for m:p1:4 in model p1:pmos.
 Warning: Pd = 0 is less than W for m:p1:2 in model p1:nmos.
 Warning: Ps = 0 is less than W for m:p1:2 in model p1:nmos.
+Warning: vnre_r1: no DC value, transient time 0 value used
+Warning: verase: no DC value, transient time 0 value used
+Warning: vexpose: no DC value, transient time 0 value used
 Warning: Node out1 has less than two connections
+Warning: vnre_r1: no DC value, transient time 0 value used
+Warning: verase: no DC value, transient time 0 value used
+Warning: vexpose: no DC value, transient time 0 value used
 

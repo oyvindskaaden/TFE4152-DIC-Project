@@ -2,7 +2,7 @@
 ! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
 ! Output: OUT
 
-.subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT
+.subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2
 !!!!!!!!!!!!!!!!!!!
 !!!!! Factors !!!!!
 !!!!!!!!!!!!!!!!!!!
