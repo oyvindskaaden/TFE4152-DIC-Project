@@ -15,6 +15,9 @@
 ! Convertion between NMOS and PMOS
 .param NtoPMOS  = 3
 
+! Size of sampeling capacitor
+.param cs_size  = 2pf
+
 ! Actual lengths
 .param W1   = {WL1 * L}             ! M1, NMOS
 .param W2   = {WL2 * L}             ! M2, NMOS
@@ -53,7 +56,7 @@ M1 N1 EXPOSE N2 Vss NMOS L=L W=W1
 M2 N2 ERASE Vss Vss NMOS L=L W=W2
 
 ! Sampleling caps
-CS N2 Vss 1pf
+CS N2 Vss cs_size
 
 ! M3 Transistor
 M3 Vss N2 N3 Vdd PMOS L=L W=W3
