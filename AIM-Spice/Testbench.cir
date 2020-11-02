@@ -12,7 +12,7 @@
 * The voltage across internal capacitor (any pixel) is also of interest (here called OUT_SAMPLED1)
 * You should also plot the control signals EXPOSE, NRE_R1, NRE_R2 and ERASE
 
-.param Ipd_1 = 750p ! Photodiode current, range [50 pA, 750 pA]
+.param Ipd_1 = 500p ! Photodiode current, range [50 pA, 750 pA]
 .param VDD = 1.8 ! Supply voltage
 .param EXPOSURETIME = 2m ! Exposure time, range [2 ms, 30 ms]
 
@@ -30,14 +30,23 @@ VDD 1 0 dc VDD
 VEXPOSE EXPOSE 0 dc 0 PULSE(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
 VERASE ERASE 0 dc 0 PULSE(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
 VNRE_R1 NRE_R1 0 dc 0 PULSE(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
-!VNRE_R2 NRE_R2 0 dc 0  PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
+VNRE_R2 NRE_R2 0 dc 0  PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
 
-.include ./Pixel.cir
 
-XP1 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL
+! Pixel subcircuit
+! syntax: XPixel VDD VSS EXPOSE ERASE NRE OUT CAP_VOLTAGE PIXEL
+.include ./models/pixel.cir
 
+! Pixels follow matrix format
+XP11 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL
+XP12 1 0 EXPOSE ERASE NRE_R1 OUT2 OUT_SAMPLED2 PIXEL
+XP21 1 0 EXPOSE ERASE NRE_R2 OUT1 OUT_SAMPLED3 PIXEL
+XP22 1 0 EXPOSE ERASE NRE_R2 OUT2 OUT_SAMPLED4 PIXEL
+
+! Do a transient analysis
 .tran 5u 12m 0 10u
 
-!.plot V(OUT1) !V(OUT2) ! signals going to ADC
-.plot V(EXPOSE) V(NRE_R1) V(ERASE) !V(NRE_R2) V(ERASE)
-.plot V(OUT1) V(OUT_SAMPLED1)
+! Plot the voltages
+.plot V(OUT1) V(OUT2) ! signals going to ADC
+.plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
+.plot V(OUT_SAMPLED1) V(OUT_SAMPLED2) V(OUT_SAMPLED3) V(OUT_SAMPLED4)
