@@ -2,7 +2,7 @@
 ! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
 ! Output: OUT
 
-.subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2
+.subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2 PARAM: I_PD=750p
 !!!!!!!!!!!!!!!!!!!
 !!!!! Factors !!!!!
 !!!!!!!!!!!!!!!!!!!
@@ -24,6 +24,7 @@
 .param W3   = {WL3 * L * NtoPMOS}   ! M3, PMOS
 .param W4   = {WL4 * L * NtoPMOS}   ! M4, PMOS
 
+.param Ipd = {I_PD}
 
 !!!!!!!!!!!!!!!!!!!!
 !!!!! Includes !!!!!
@@ -39,7 +40,7 @@
 !!!!!!!!!!!!!!!!!!!!!!
 !!!!! Photodiode !!!!!
 !!!!!!!!!!!!!!!!!!!!!!
-XPD Vdd N1 PhotoDiode
+XPD Vdd N1 PhotoDiode !Ipd={I_PD}
 
 
 !!!!!!!!!!!!!!!!!!

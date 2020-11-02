@@ -1,17 +1,14 @@
 
-                 *********************************************
-                 *                                           *
-                 *             A I M - S p i c e             *
-                 *                                           *
-                 *         Professional Version 2020.100           *
-                 *                                           *
-                 *********************************************
+*************************************************************************************
 
-	Date: Mon Nov  2 16:03:33 2020
-	Circuit File: Z:\home\oyvind\repos\TFE4152-DIC-Project\AIM-Spice\Testbench.cir
-	Analysis: Transient
+              AIM-Spice Version 2020.100  (Built on Aug 27 2020)
 
-**************************  Circuit Description  **************************
+*************************************************************************************
+
+	Date: Mon Nov  2 17:07:09 2020
+	Circuit File: Testbench.cir
+
+*******************************  Circuit Description  *******************************
 
      1:  * This is a parametrized testbench for your pixel circuit array
      2:  
@@ -27,328 +24,312 @@
     12:  * The voltage across internal capacitor (any pixel) is also of interest (here called OUT_SAMPLED1)
     13:  * You should also plot the control signals EXPOSE, NRE_R1, NRE_R2 and ERASE
     14:  
-    15:  .param Ipd_1 = 500p ! Photodiode current, range [50 pA, 750 pA]
-    16:  .param VDD = 1.8 ! Supply voltage
-    17:  .param EXPOSURETIME = 2m ! Exposure time, range [2 ms, 30 ms]
-    18:  
-    19:  .param TRF = {EXPOSURETIME/100} ! Risetime and falltime of EXPOSURE and ERASE signals
-    20:  .param PW = {EXPOSURETIME} ! Pulsewidth of EXPOSURE and ERASE signals
-    21:  .param PERIOD = {EXPOSURETIME*10} ! Period for testbench sources
-    22:  .param FS = 1k; ! Sampling clock frequency 
-    23:  .param CLK_PERIOD = {1/FS} ! Sampling clock period
-    24:  .param EXPOSE_DLY = {CLK_PERIOD} ! Delay for EXPOSE signal
-    25:  .param NRE_R1_DLY = {2*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R1 signal
-    26:  .param NRE_R2_DLY = {4*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R2 signal
-    27:  .param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
-    28:  
-    29:  VDD 1 0 dc VDD
-    30:  VEXPOSE EXPOSE 0 dc 0 PULSE(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
-    31:  VERASE ERASE 0 dc 0 PULSE(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
-    32:  VNRE_R1 NRE_R1 0 dc 0 PULSE(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
-    33:  VNRE_R2 NRE_R2 0 dc 0  PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
-    34:  
-    35:  
-    36:  ! Pixel subcircuit
-    37:  ! syntax: XPixel VDD VSS EXPOSE ERASE NRE OUT CAP_VOLTAGE PIXEL
-    38:  *include ./models/Pixel.cir
-    39:  ! Pixel cicuit
-    40:  ! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
-    41:  ! Output: OUT
-    42:  
-    43:  .subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2
-    44:  !!!!!!!!!!!!!!!!!!!
-    45:  !!!!! Factors !!!!!
-    46:  !!!!!!!!!!!!!!!!!!!
-    47:  .param  L       = 0.4u  ! Standard gate length
-    48:  .param  WL1     = 3     ! M1 NMOS gate width factor
-    49:  .param  WL2     = 3     ! M2 NMOS gate width factor
-    50:  .param  WL3     = 3     ! M3 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
-    51:  .param  WL4     = 3     ! M4 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
-    52:  
-    53:  ! Convertion between NMOS and PMOS
-    54:  .param NtoPMOS  = 3
+    15:  .param Ipd_11 = 750p ! Photodiode current, range [50 pA, 750 pA]
+    16:  .param Ipd_12 = 50p ! Photodiode current, range [50 pA, 750 pA]
+    17:  .param Ipd_21 = 750p ! Photodiode current, range [50 pA, 750 pA]
+    18:  .param Ipd_22 = 50p ! Photodiode current, range [50 pA, 750 pA]
+    19:  .param VDD = 1.8 ! Supply voltage
+    20:  .param EXPOSURETIME = 2m ! Exposure time, range [2 ms, 30 ms]
+    21:  
+    22:  .param TRF = {EXPOSURETIME/100} ! Risetime and falltime of EXPOSURE and ERASE signals
+    23:  .param PW = {EXPOSURETIME} ! Pulsewidth of EXPOSURE and ERASE signals
+    24:  .param PERIOD = {EXPOSURETIME*10} ! Period for testbench sources
+    25:  .param FS = 1k; ! Sampling clock frequency 
+    26:  .param CLK_PERIOD = {1/FS} ! Sampling clock period
+    27:  .param EXPOSE_DLY = {CLK_PERIOD} ! Delay for EXPOSE signal
+    28:  .param NRE_R1_DLY = {2*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R1 signal
+    29:  .param NRE_R2_DLY = {4*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R2 signal
+    30:  .param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
+    31:  
+    32:  VDD 1 0 dc VDD
+    33:  VEXPOSE EXPOSE 0 dc 0 PULSE(0 VDD EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
+    34:  VERASE ERASE 0 dc 0 PULSE(0 VDD ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
+    35:  VNRE_R1 NRE_R1 0 dc 0 PULSE(VDD 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
+    36:  VNRE_R2 NRE_R2 0 dc 0  PULSE(VDD 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
+    37:  
+    38:  
+    39:  ! Pixel subcircuit
+    40:  ! syntax: XPixel VDD VSS EXPOSE ERASE NRE OUT CAP_VOLTAGE PIXEL
+    41:  *include ./pixel.cir
+    42:  ! Pixel cicuit
+    43:  ! Inputs: Vdd, Vss, EXPOSE, ERASE, NRE
+    44:  ! Output: OUT
+    45:  
+    46:  .subckt PIXEL Vdd Vss EXPOSE ERASE NRE OUT N2 PARAM: I_PD=750p
+    47:  !!!!!!!!!!!!!!!!!!!
+    48:  !!!!! Factors !!!!!
+    49:  !!!!!!!!!!!!!!!!!!!
+    50:  .param  L       = 0.4u  ! Standard gate length
+    51:  .param  WL1     = 3     ! M1 NMOS gate width factor
+    52:  .param  WL2     = 3     ! M2 NMOS gate width factor
+    53:  .param  WL3     = 3     ! M3 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
+    54:  .param  WL4     = 3     ! M4 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
     55:  
-    56:  ! Size of sampeling capacitor
-    57:  .param cs_size  = 2pf
+    56:  ! Convertion between NMOS and PMOS
+    57:  .param NtoPMOS  = 3
     58:  
-    59:  ! Actual lengths
-    60:  .param W1   = {WL1 * L}             ! M1, NMOS
-    61:  .param W2   = {WL2 * L}             ! M2, NMOS
-    62:  .param W3   = {WL3 * L * NtoPMOS}   ! M3, PMOS
-    63:  .param W4   = {WL4 * L * NtoPMOS}   ! M4, PMOS
-    64:  
-    65:  
-    66:  !!!!!!!!!!!!!!!!!!!!
-    67:  !!!!! Includes !!!!!
-    68:  !!!!!!!!!!!!!!!!!!!!
+    59:  ! Size of sampeling capacitor
+    60:  .param cs_size  = 2pf
+    61:  
+    62:  ! Actual lengths
+    63:  .param W1   = {WL1 * L}             ! M1, NMOS
+    64:  .param W2   = {WL2 * L}             ! M2, NMOS
+    65:  .param W3   = {WL3 * L * NtoPMOS}   ! M3, PMOS
+    66:  .param W4   = {WL4 * L * NtoPMOS}   ! M4, PMOS
+    67:  
+    68:  .param Ipd = {I_PD}
     69:  
-    70:  ! Photodiode
-    71:  *include ./photodiode.cir
-    72:  .subckt PhotoDiode  VDD N1_R1C1 
-    73:  I1_R1C1  VDD   N1_R1C1   DC  Ipd_1            ! Photo current source
-    74:  d1 N1_R1C1 VDD dwell 1                        ! Reverse biased Diode
-    75:  .model dwell d cj0=1e-14 is=1e-12 m=0.5 bv=40 ! Diode model
-    76:  Cd1 N1_R1C1 VDD 30f                           ! Photo diode capacitor
-    77:  .ends
-    78:  *end of: ./photodiode.cir
-    79:  ! Transistors
-    80:  *include ./p18_model_card.inc
-    81:  * p18 model card
-    82:  .MODEL NMOS NMOS  								
-    83:  + VERSION	=	3.1						
-    84:  + LEVEL	=	49	NOIMOD	=	1	TNOM	=	2.70E+01
-    85:  + TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07	NCH	=	2.33E+17
-    86:  + VTH0	=	'0.36+vt_shift'	K1	=	5.84E-01	K2	=	4.14E-03
-    87:  + K3	=	1.01E-03	K3B	=	2.20E+00	W0	=	1.00E-07
-    88:  + NLX	=	1.81E-07	DVT0W	=	0.00E+00	DVT1W	=	0.00E+00
-    89:  + DVT2W	=	0.00E+00	DVT0	=	1.73E+00	DVT1	=	4.38E-01
-    90:  + DVT2	=	-3.70E-04	U0	=	'260*proc_delta*proc_delta'	UA	=	-1.38E-09
-    91:  + UB	=	2.26E-18	UC	=	5.46E-11	VSAT	=	1.03E+05
-    92:  + A0	=	1.92E+00	AGS	=	4.20E-01	B0	=	-1.52E-09
-    93:  + B1	=	-9.92E-08	KETA	=	-7.16E-03	A1	=	6.61E-04
-    94:  + A2	=	8.89E-01	RDSW	=	1.12E+02	PRWG	=	4.92E-01
-    95:  + PRWB	=	-2.02E-01	WR	=	1.00E+00	WINT	=	7.12E-09
-    96:  + LINT	=	1.12E-08	XL	=	-2.00E-08	XW	=	-1.00E-08
-    97:  + DWG	=	-3.82E-09	DWB	=	8.63E-09	VOFF	=	-8.82E-02
-    98:  + NFACTOR	=	2.30E+00	CIT	=	0.00E+00	CDSC	=	2.40E-04
-    99:  + CDSCD	=	0.00E+00	CDSCB	=	0.00E+00	ETA0	=	3.13E-03
-   100:  + ETAB	=	1.00E+00	DSUB	=	2.25E-02	PCLM	=	7.20E-01
-   101:  + PDIBLC1	=	2.15E-01	PDIBLC2	=	2.23E-03	PDIBLCB	=	1.00E-01
-   102:  + DROUT	=	8.01E-01	PSCBE1	=	5.44E+08	PSCBE2	=	1.00E-03
-   103:  + PVAG	=	1.00E-12	DELTA	=	1.00E-02	RSH	=	6.78E+00
-   104:  + MOBMOD	=	1.00E+00	PRT	=	0.00E+00	UTE	=	-1.50E+00
-   105:  + KT1	=	-1.10E-01	KT1L	=	0.00E+00	KT2	=	2.19E-02
-   106:  + UA1	=	4.28E-09	UB1	=	-7.62E-18	UC1	=	-5.57E-11
-   107:  + AT	=	3.30E+04	WL	=	0.00E+00	WLN	=	1.00E+00
-   108:  + WW	=	0.00E+00	WWN	=	1.00E+00	WWL	=	0.00E+00
-   109:  + LL	=	0.00E+00	LLN	=	1.00E+00	LW	=	0.00E+00
-   110:  + LWN	=	1.00E+00	LWL	=	0.00E+00	CAPMOD	=	2.00E+00
-   111:  + XPART	=	5.00E-01	CGDO	=	6.98E-10	CGSO	=	7.03E-10
-   112:  + CGBO	=	1.00E-12	CJ	=	'9.8e-4/proc_delta'	PB	=	7.34E-01
-   113:  + MJ	=	3.63E-01	CJSW	=	'2.4e-10/proc_delta'	PBSW	=	4.71E-01
-   114:  + MJSW	=	1.00E-01	CJSWG	=	3.29E-10	PBSWG	=	4.66E-01
-   115:  + MJSWG	=	1.00E-01	CF	=	0.00E+00	PVTH0	=	-7.16E-04
-   116:  + PRDSW	=	-6.66E-01	PK2	=	5.92E-04	WKETA	=	2.14E-04
-   117:  + LKETA	=	-1.51E-02	PU0	=	3.36E+00	PUA	=	-1.31E-11
-   118:  + PUB	=	0.00E+00	PVSAT	=	1.25E+03	PETA0	=	1.00E-04
-   119:  + PKETA	=	6.45E-04	KF	=	4.46E-29			
-   120:  								
-   121:  .MODEL PMOS PMOS  								
-   122:  + VERSION	=	3.1						
-   123:  + LEVEL	=	49	NOIMOD	=	1			
-   124:  + TNOM	=	2.70E+01	TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07
-   125:  + NCH	=	4.12E+17	VTH0	=	'-0.39-vt_shift'	K1	=	5.50E-01
-   126:  + K2	=	3.50E-02	K3	=	0.00E+00	K3B	=	1.20E+01
-   127:  + W0	=	1.00E-06	NLX	=	1.25E-07	DVT0W	=	0.00E+00
-   128:  + DVT1W	=	0.00E+00	DVT2W	=	0.00E+00	DVT0	=	5.53E-01
-   129:  + DVT1	=	2.46E-01	DVT2	=	1.00E-01	U0	=	'110*proc_delta*proc_delta'
-   130:  + UA	=	1.44E-09	UB	=	2.29E-21	UC	=	-1.00E-10
-   131:  + VSAT	=	1.95E+05	A0	=	1.72E+00	AGS	=	3.80E-01
-   132:  + B0	=	5.87E-07	B1	=	1.44E-06	KETA	=	2.21E-02
-   133:  + A1	=	4.66E-01	A2	=	3.00E-01	RDSW	=	3.11E+02
-   134:  + PRWG	=	5.00E-01	PRWB	=	1.64E-02	WR	=	1.00E+00
-   135:  + WINT	=	0.00E+00	LINT	=	2.00E-08	XL	=	-2.00E-08
-   136:  + XW	=	-1.00E-08	DWG	=	-3.49E-08	DWB	=	1.22E-09
-   137:  + VOFF	=	-9.80E-02	NFACTOR	=	2.00E+00	CIT	=	0.00E+00
-   138:  + CDSC	=	2.40E-04	CDSCD	=	0.00E+00	CDSCB	=	0.00E+00
-   139:  + ETA0	=	1.12E-03	ETAB	=	-4.79E-04	DSUB	=	1.60E-03
-   140:  + PCLM	=	1.50E+00	PDIBLC1	=	3.00E-02	PDIBLC2	=	-1.01E-05
-   141:  + PDIBLCB	=	1.00E-01	DROUT	=	1.56E-03	PSCBE1	=	4.91E+09
-   142:  + PSCBE2	=	1.64E-09	PVAG	=	3.48E+00	DELTA	=	1.00E-02
-   143:  + RSH	=	7.69E+00	MOBMOD	=	1.00E+00	PRT	=	0.00E+00
-   144:  + UTE	=	-1.49E+00	KT1	=	-1.09E-01	KT1L	=	0.00E+00
-   145:  + KT2	=	2.18E-02	UA1	=	4.27E-09	UB1	=	-7.68E-18
-   146:  + UC1	=	-5.57E-11	AT	=	3.31E+04	WL	=	0.00E+00
-   147:  + WLN	=	1.00E+00	WW	=	0.00E+00	WWN	=	1.00E+00
-   148:  + WWL	=	0.00E+00	LL	=	0.00E+00	LLN	=	1.00E+00
-   149:  + LW	=	0.00E+00	LWN	=	1.00E+00	LWL	=	0.00E+00
-   150:  + CAPMOD	=	2.00E+00	XPART	=	5.00E-01	CGDO	=	6.88E-10
-   151:  + CGSO	=	6.85E-10	CGBO	=	1.00E-12	CJ	=	'1.2e-3/proc_delta'
-   152:  + PB	=	8.70E-01	MJ	=	4.20E-01	CJSW	=	'2.4e-10/proc_delta'
-   153:  + PBSW	=	8.00E-01	MJSW	=	3.57E-01	CJSWG	=	4.24E-10
-   154:  + PBSWG	=	8.00E-01	MJSWG	=	3.56E-01	CF	=	0.00E+00
-   155:  + PVTH0	=	3.53E-03	PRDSW	=	1.02E+01	PK2	=	3.35E-03
-   156:  + WKETA	=	3.52E-02	LKETA	=	-2.06E-03	PU0	=	-2.19E+00
-   157:  + PUA	=	-7.63E-11	PUB	=	9.91E-22	PVSAT	=	5.00E+01
-   158:  + PKETA	=	-6.41E-03	KF	=	1.29E-29	PETA0	=	7.31E-05
-   159:  
-   160:  *end of: ./p18_model_card.inc
-   161:  *include ./p18_cmos_models_tt.inc
-   162:  .param proc_delta = 1.0
-   163:  .param vt_shift = 0.0
-   164:  *include p18_model_card.inc
-   165:  * p18 model card
-   166:  .MODEL NMOS NMOS  								
-   167:  + VERSION	=	3.1						
-   168:  + LEVEL	=	49	NOIMOD	=	1	TNOM	=	2.70E+01
-   169:  + TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07	NCH	=	2.33E+17
-   170:  + VTH0	=	'0.36+vt_shift'	K1	=	5.84E-01	K2	=	4.14E-03
-   171:  + K3	=	1.01E-03	K3B	=	2.20E+00	W0	=	1.00E-07
-   172:  + NLX	=	1.81E-07	DVT0W	=	0.00E+00	DVT1W	=	0.00E+00
-   173:  + DVT2W	=	0.00E+00	DVT0	=	1.73E+00	DVT1	=	4.38E-01
-   174:  + DVT2	=	-3.70E-04	U0	=	'260*proc_delta*proc_delta'	UA	=	-1.38E-09
-   175:  + UB	=	2.26E-18	UC	=	5.46E-11	VSAT	=	1.03E+05
-   176:  + A0	=	1.92E+00	AGS	=	4.20E-01	B0	=	-1.52E-09
-   177:  + B1	=	-9.92E-08	KETA	=	-7.16E-03	A1	=	6.61E-04
-   178:  + A2	=	8.89E-01	RDSW	=	1.12E+02	PRWG	=	4.92E-01
-   179:  + PRWB	=	-2.02E-01	WR	=	1.00E+00	WINT	=	7.12E-09
-   180:  + LINT	=	1.12E-08	XL	=	-2.00E-08	XW	=	-1.00E-08
-   181:  + DWG	=	-3.82E-09	DWB	=	8.63E-09	VOFF	=	-8.82E-02
-   182:  + NFACTOR	=	2.30E+00	CIT	=	0.00E+00	CDSC	=	2.40E-04
-   183:  + CDSCD	=	0.00E+00	CDSCB	=	0.00E+00	ETA0	=	3.13E-03
-   184:  + ETAB	=	1.00E+00	DSUB	=	2.25E-02	PCLM	=	7.20E-01
-   185:  + PDIBLC1	=	2.15E-01	PDIBLC2	=	2.23E-03	PDIBLCB	=	1.00E-01
-   186:  + DROUT	=	8.01E-01	PSCBE1	=	5.44E+08	PSCBE2	=	1.00E-03
-   187:  + PVAG	=	1.00E-12	DELTA	=	1.00E-02	RSH	=	6.78E+00
-   188:  + MOBMOD	=	1.00E+00	PRT	=	0.00E+00	UTE	=	-1.50E+00
-   189:  + KT1	=	-1.10E-01	KT1L	=	0.00E+00	KT2	=	2.19E-02
-   190:  + UA1	=	4.28E-09	UB1	=	-7.62E-18	UC1	=	-5.57E-11
-   191:  + AT	=	3.30E+04	WL	=	0.00E+00	WLN	=	1.00E+00
-   192:  + WW	=	0.00E+00	WWN	=	1.00E+00	WWL	=	0.00E+00
-   193:  + LL	=	0.00E+00	LLN	=	1.00E+00	LW	=	0.00E+00
-   194:  + LWN	=	1.00E+00	LWL	=	0.00E+00	CAPMOD	=	2.00E+00
-   195:  + XPART	=	5.00E-01	CGDO	=	6.98E-10	CGSO	=	7.03E-10
-   196:  + CGBO	=	1.00E-12	CJ	=	'9.8e-4/proc_delta'	PB	=	7.34E-01
-   197:  + MJ	=	3.63E-01	CJSW	=	'2.4e-10/proc_delta'	PBSW	=	4.71E-01
-   198:  + MJSW	=	1.00E-01	CJSWG	=	3.29E-10	PBSWG	=	4.66E-01
-   199:  + MJSWG	=	1.00E-01	CF	=	0.00E+00	PVTH0	=	-7.16E-04
-   200:  + PRDSW	=	-6.66E-01	PK2	=	5.92E-04	WKETA	=	2.14E-04
-   201:  + LKETA	=	-1.51E-02	PU0	=	3.36E+00	PUA	=	-1.31E-11
-   202:  + PUB	=	0.00E+00	PVSAT	=	1.25E+03	PETA0	=	1.00E-04
-   203:  + PKETA	=	6.45E-04	KF	=	4.46E-29			
-   204:  								
-   205:  .MODEL PMOS PMOS  								
-   206:  + VERSION	=	3.1						
-   207:  + LEVEL	=	49	NOIMOD	=	1			
-   208:  + TNOM	=	2.70E+01	TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07
-   209:  + NCH	=	4.12E+17	VTH0	=	'-0.39-vt_shift'	K1	=	5.50E-01
-   210:  + K2	=	3.50E-02	K3	=	0.00E+00	K3B	=	1.20E+01
-   211:  + W0	=	1.00E-06	NLX	=	1.25E-07	DVT0W	=	0.00E+00
-   212:  + DVT1W	=	0.00E+00	DVT2W	=	0.00E+00	DVT0	=	5.53E-01
-   213:  + DVT1	=	2.46E-01	DVT2	=	1.00E-01	U0	=	'110*proc_delta*proc_delta'
-   214:  + UA	=	1.44E-09	UB	=	2.29E-21	UC	=	-1.00E-10
-   215:  + VSAT	=	1.95E+05	A0	=	1.72E+00	AGS	=	3.80E-01
-   216:  + B0	=	5.87E-07	B1	=	1.44E-06	KETA	=	2.21E-02
-   217:  + A1	=	4.66E-01	A2	=	3.00E-01	RDSW	=	3.11E+02
-   218:  + PRWG	=	5.00E-01	PRWB	=	1.64E-02	WR	=	1.00E+00
-   219:  + WINT	=	0.00E+00	LINT	=	2.00E-08	XL	=	-2.00E-08
-   220:  + XW	=	-1.00E-08	DWG	=	-3.49E-08	DWB	=	1.22E-09
-   221:  + VOFF	=	-9.80E-02	NFACTOR	=	2.00E+00	CIT	=	0.00E+00
-   222:  + CDSC	=	2.40E-04	CDSCD	=	0.00E+00	CDSCB	=	0.00E+00
-   223:  + ETA0	=	1.12E-03	ETAB	=	-4.79E-04	DSUB	=	1.60E-03
-   224:  + PCLM	=	1.50E+00	PDIBLC1	=	3.00E-02	PDIBLC2	=	-1.01E-05
-   225:  + PDIBLCB	=	1.00E-01	DROUT	=	1.56E-03	PSCBE1	=	4.91E+09
-   226:  + PSCBE2	=	1.64E-09	PVAG	=	3.48E+00	DELTA	=	1.00E-02
-   227:  + RSH	=	7.69E+00	MOBMOD	=	1.00E+00	PRT	=	0.00E+00
-   228:  + UTE	=	-1.49E+00	KT1	=	-1.09E-01	KT1L	=	0.00E+00
-   229:  + KT2	=	2.18E-02	UA1	=	4.27E-09	UB1	=	-7.68E-18
-   230:  + UC1	=	-5.57E-11	AT	=	3.31E+04	WL	=	0.00E+00
-   231:  + WLN	=	1.00E+00	WW	=	0.00E+00	WWN	=	1.00E+00
-   232:  + WWL	=	0.00E+00	LL	=	0.00E+00	LLN	=	1.00E+00
-   233:  + LW	=	0.00E+00	LWN	=	1.00E+00	LWL	=	0.00E+00
-   234:  + CAPMOD	=	2.00E+00	XPART	=	5.00E-01	CGDO	=	6.88E-10
-   235:  + CGSO	=	6.85E-10	CGBO	=	1.00E-12	CJ	=	'1.2e-3/proc_delta'
-   236:  + PB	=	8.70E-01	MJ	=	4.20E-01	CJSW	=	'2.4e-10/proc_delta'
-   237:  + PBSW	=	8.00E-01	MJSW	=	3.57E-01	CJSWG	=	4.24E-10
-   238:  + PBSWG	=	8.00E-01	MJSWG	=	3.56E-01	CF	=	0.00E+00
-   239:  + PVTH0	=	3.53E-03	PRDSW	=	1.02E+01	PK2	=	3.35E-03
-   240:  + WKETA	=	3.52E-02	LKETA	=	-2.06E-03	PU0	=	-2.19E+00
-   241:  + PUA	=	-7.63E-11	PUB	=	9.91E-22	PVSAT	=	5.00E+01
-   242:  + PKETA	=	-6.41E-03	KF	=	1.29E-29	PETA0	=	7.31E-05
-   243:  
-   244:  *end of: p18_model_card.inc
-   245:  *end of: ./p18_cmos_models_tt.inc
-   246:  
+    70:  !!!!!!!!!!!!!!!!!!!!
+    71:  !!!!! Includes !!!!!
+    72:  !!!!!!!!!!!!!!!!!!!!
+    73:  
+    74:  ! Photodiode
+    75:  *include ./photodiode.cir
+    76:  .subckt PhotoDiode  VDD N1_R1C1 !PARAM: Ipd=750p
+    77:  I1_R1C1  VDD   N1_R1C1   DC  Ipd              ! Photo current source
+    78:  d1 N1_R1C1 VDD dwell 1                        ! Reverse biased Diode
+    79:  .model dwell d cj0=1e-14 is=1e-12 m=0.5 bv=40 ! Diode model
+    80:  Cd1 N1_R1C1 VDD 30f                           ! Photo diode capacitor
+    81:  .ends
+    82:  *end of: ./photodiode.cir
+    83:  ! Transistors
+    84:  *include ./p18_model_card.inc
+    85:  * p18 model card
+    86:  .MODEL NMOS NMOS  								
+    87:  + VERSION	=	3.1						
+    88:  + LEVEL	=	49	NOIMOD	=	1	TNOM	=	2.70E+01
+    89:  + TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07	NCH	=	2.33E+17
+    90:  + VTH0	=	'0.36+vt_shift'	K1	=	5.84E-01	K2	=	4.14E-03
+    91:  + K3	=	1.01E-03	K3B	=	2.20E+00	W0	=	1.00E-07
+    92:  + NLX	=	1.81E-07	DVT0W	=	0.00E+00	DVT1W	=	0.00E+00
+    93:  + DVT2W	=	0.00E+00	DVT0	=	1.73E+00	DVT1	=	4.38E-01
+    94:  + DVT2	=	-3.70E-04	U0	=	'260*proc_delta*proc_delta'	UA	=	-1.38E-09
+    95:  + UB	=	2.26E-18	UC	=	5.46E-11	VSAT	=	1.03E+05
+    96:  + A0	=	1.92E+00	AGS	=	4.20E-01	B0	=	-1.52E-09
+    97:  + B1	=	-9.92E-08	KETA	=	-7.16E-03	A1	=	6.61E-04
+    98:  + A2	=	8.89E-01	RDSW	=	1.12E+02	PRWG	=	4.92E-01
+    99:  + PRWB	=	-2.02E-01	WR	=	1.00E+00	WINT	=	7.12E-09
+   100:  + LINT	=	1.12E-08	XL	=	-2.00E-08	XW	=	-1.00E-08
+   101:  + DWG	=	-3.82E-09	DWB	=	8.63E-09	VOFF	=	-8.82E-02
+   102:  + NFACTOR	=	2.30E+00	CIT	=	0.00E+00	CDSC	=	2.40E-04
+   103:  + CDSCD	=	0.00E+00	CDSCB	=	0.00E+00	ETA0	=	3.13E-03
+   104:  + ETAB	=	1.00E+00	DSUB	=	2.25E-02	PCLM	=	7.20E-01
+   105:  + PDIBLC1	=	2.15E-01	PDIBLC2	=	2.23E-03	PDIBLCB	=	1.00E-01
+   106:  + DROUT	=	8.01E-01	PSCBE1	=	5.44E+08	PSCBE2	=	1.00E-03
+   107:  + PVAG	=	1.00E-12	DELTA	=	1.00E-02	RSH	=	6.78E+00
+   108:  + MOBMOD	=	1.00E+00	PRT	=	0.00E+00	UTE	=	-1.50E+00
+   109:  + KT1	=	-1.10E-01	KT1L	=	0.00E+00	KT2	=	2.19E-02
+   110:  + UA1	=	4.28E-09	UB1	=	-7.62E-18	UC1	=	-5.57E-11
+   111:  + AT	=	3.30E+04	WL	=	0.00E+00	WLN	=	1.00E+00
+   112:  + WW	=	0.00E+00	WWN	=	1.00E+00	WWL	=	0.00E+00
+   113:  + LL	=	0.00E+00	LLN	=	1.00E+00	LW	=	0.00E+00
+   114:  + LWN	=	1.00E+00	LWL	=	0.00E+00	CAPMOD	=	2.00E+00
+   115:  + XPART	=	5.00E-01	CGDO	=	6.98E-10	CGSO	=	7.03E-10
+   116:  + CGBO	=	1.00E-12	CJ	=	'9.8e-4/proc_delta'	PB	=	7.34E-01
+   117:  + MJ	=	3.63E-01	CJSW	=	'2.4e-10/proc_delta'	PBSW	=	4.71E-01
+   118:  + MJSW	=	1.00E-01	CJSWG	=	3.29E-10	PBSWG	=	4.66E-01
+   119:  + MJSWG	=	1.00E-01	CF	=	0.00E+00	PVTH0	=	-7.16E-04
+   120:  + PRDSW	=	-6.66E-01	PK2	=	5.92E-04	WKETA	=	2.14E-04
+   121:  + LKETA	=	-1.51E-02	PU0	=	3.36E+00	PUA	=	-1.31E-11
+   122:  + PUB	=	0.00E+00	PVSAT	=	1.25E+03	PETA0	=	1.00E-04
+   123:  + PKETA	=	6.45E-04	KF	=	4.46E-29			
+   124:  								
+   125:  .MODEL PMOS PMOS  								
+   126:  + VERSION	=	3.1						
+   127:  + LEVEL	=	49	NOIMOD	=	1			
+   128:  + TNOM	=	2.70E+01	TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07
+   129:  + NCH	=	4.12E+17	VTH0	=	'-0.39-vt_shift'	K1	=	5.50E-01
+   130:  + K2	=	3.50E-02	K3	=	0.00E+00	K3B	=	1.20E+01
+   131:  + W0	=	1.00E-06	NLX	=	1.25E-07	DVT0W	=	0.00E+00
+   132:  + DVT1W	=	0.00E+00	DVT2W	=	0.00E+00	DVT0	=	5.53E-01
+   133:  + DVT1	=	2.46E-01	DVT2	=	1.00E-01	U0	=	'110*proc_delta*proc_delta'
+   134:  + UA	=	1.44E-09	UB	=	2.29E-21	UC	=	-1.00E-10
+   135:  + VSAT	=	1.95E+05	A0	=	1.72E+00	AGS	=	3.80E-01
+   136:  + B0	=	5.87E-07	B1	=	1.44E-06	KETA	=	2.21E-02
+   137:  + A1	=	4.66E-01	A2	=	3.00E-01	RDSW	=	3.11E+02
+   138:  + PRWG	=	5.00E-01	PRWB	=	1.64E-02	WR	=	1.00E+00
+   139:  + WINT	=	0.00E+00	LINT	=	2.00E-08	XL	=	-2.00E-08
+   140:  + XW	=	-1.00E-08	DWG	=	-3.49E-08	DWB	=	1.22E-09
+   141:  + VOFF	=	-9.80E-02	NFACTOR	=	2.00E+00	CIT	=	0.00E+00
+   142:  + CDSC	=	2.40E-04	CDSCD	=	0.00E+00	CDSCB	=	0.00E+00
+   143:  + ETA0	=	1.12E-03	ETAB	=	-4.79E-04	DSUB	=	1.60E-03
+   144:  + PCLM	=	1.50E+00	PDIBLC1	=	3.00E-02	PDIBLC2	=	-1.01E-05
+   145:  + PDIBLCB	=	1.00E-01	DROUT	=	1.56E-03	PSCBE1	=	4.91E+09
+   146:  + PSCBE2	=	1.64E-09	PVAG	=	3.48E+00	DELTA	=	1.00E-02
+   147:  + RSH	=	7.69E+00	MOBMOD	=	1.00E+00	PRT	=	0.00E+00
+   148:  + UTE	=	-1.49E+00	KT1	=	-1.09E-01	KT1L	=	0.00E+00
+   149:  + KT2	=	2.18E-02	UA1	=	4.27E-09	UB1	=	-7.68E-18
+   150:  + UC1	=	-5.57E-11	AT	=	3.31E+04	WL	=	0.00E+00
+   151:  + WLN	=	1.00E+00	WW	=	0.00E+00	WWN	=	1.00E+00
+   152:  + WWL	=	0.00E+00	LL	=	0.00E+00	LLN	=	1.00E+00
+   153:  + LW	=	0.00E+00	LWN	=	1.00E+00	LWL	=	0.00E+00
+   154:  + CAPMOD	=	2.00E+00	XPART	=	5.00E-01	CGDO	=	6.88E-10
+   155:  + CGSO	=	6.85E-10	CGBO	=	1.00E-12	CJ	=	'1.2e-3/proc_delta'
+   156:  + PB	=	8.70E-01	MJ	=	4.20E-01	CJSW	=	'2.4e-10/proc_delta'
+   157:  + PBSW	=	8.00E-01	MJSW	=	3.57E-01	CJSWG	=	4.24E-10
+   158:  + PBSWG	=	8.00E-01	MJSWG	=	3.56E-01	CF	=	0.00E+00
+   159:  + PVTH0	=	3.53E-03	PRDSW	=	1.02E+01	PK2	=	3.35E-03
+   160:  + WKETA	=	3.52E-02	LKETA	=	-2.06E-03	PU0	=	-2.19E+00
+   161:  + PUA	=	-7.63E-11	PUB	=	9.91E-22	PVSAT	=	5.00E+01
+   162:  + PKETA	=	-6.41E-03	KF	=	1.29E-29	PETA0	=	7.31E-05
+   163:  
+   164:  *end of: ./p18_model_card.inc
+   165:  *include ./p18_cmos_models_tt.inc
+   166:  .param proc_delta = 1.0
+   167:  .param vt_shift = 0.0
+   168:  *include p18_model_card.inc
+   169:  * p18 model card
+   170:  .MODEL NMOS NMOS  								
+   171:  + VERSION	=	3.1						
+   172:  + LEVEL	=	49	NOIMOD	=	1	TNOM	=	2.70E+01
+   173:  + TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07	NCH	=	2.33E+17
+   174:  + VTH0	=	'0.36+vt_shift'	K1	=	5.84E-01	K2	=	4.14E-03
+   175:  + K3	=	1.01E-03	K3B	=	2.20E+00	W0	=	1.00E-07
+   176:  + NLX	=	1.81E-07	DVT0W	=	0.00E+00	DVT1W	=	0.00E+00
+   177:  + DVT2W	=	0.00E+00	DVT0	=	1.73E+00	DVT1	=	4.38E-01
+   178:  + DVT2	=	-3.70E-04	U0	=	'260*proc_delta*proc_delta'	UA	=	-1.38E-09
+   179:  + UB	=	2.26E-18	UC	=	5.46E-11	VSAT	=	1.03E+05
+   180:  + A0	=	1.92E+00	AGS	=	4.20E-01	B0	=	-1.52E-09
+   181:  + B1	=	-9.92E-08	KETA	=	-7.16E-03	A1	=	6.61E-04
+   182:  + A2	=	8.89E-01	RDSW	=	1.12E+02	PRWG	=	4.92E-01
+   183:  + PRWB	=	-2.02E-01	WR	=	1.00E+00	WINT	=	7.12E-09
+   184:  + LINT	=	1.12E-08	XL	=	-2.00E-08	XW	=	-1.00E-08
+   185:  + DWG	=	-3.82E-09	DWB	=	8.63E-09	VOFF	=	-8.82E-02
+   186:  + NFACTOR	=	2.30E+00	CIT	=	0.00E+00	CDSC	=	2.40E-04
+   187:  + CDSCD	=	0.00E+00	CDSCB	=	0.00E+00	ETA0	=	3.13E-03
+   188:  + ETAB	=	1.00E+00	DSUB	=	2.25E-02	PCLM	=	7.20E-01
+   189:  + PDIBLC1	=	2.15E-01	PDIBLC2	=	2.23E-03	PDIBLCB	=	1.00E-01
+   190:  + DROUT	=	8.01E-01	PSCBE1	=	5.44E+08	PSCBE2	=	1.00E-03
+   191:  + PVAG	=	1.00E-12	DELTA	=	1.00E-02	RSH	=	6.78E+00
+   192:  + MOBMOD	=	1.00E+00	PRT	=	0.00E+00	UTE	=	-1.50E+00
+   193:  + KT1	=	-1.10E-01	KT1L	=	0.00E+00	KT2	=	2.19E-02
+   194:  + UA1	=	4.28E-09	UB1	=	-7.62E-18	UC1	=	-5.57E-11
+   195:  + AT	=	3.30E+04	WL	=	0.00E+00	WLN	=	1.00E+00
+   196:  + WW	=	0.00E+00	WWN	=	1.00E+00	WWL	=	0.00E+00
+   197:  + LL	=	0.00E+00	LLN	=	1.00E+00	LW	=	0.00E+00
+   198:  + LWN	=	1.00E+00	LWL	=	0.00E+00	CAPMOD	=	2.00E+00
+   199:  + XPART	=	5.00E-01	CGDO	=	6.98E-10	CGSO	=	7.03E-10
+   200:  + CGBO	=	1.00E-12	CJ	=	'9.8e-4/proc_delta'	PB	=	7.34E-01
+   201:  + MJ	=	3.63E-01	CJSW	=	'2.4e-10/proc_delta'	PBSW	=	4.71E-01
+   202:  + MJSW	=	1.00E-01	CJSWG	=	3.29E-10	PBSWG	=	4.66E-01
+   203:  + MJSWG	=	1.00E-01	CF	=	0.00E+00	PVTH0	=	-7.16E-04
+   204:  + PRDSW	=	-6.66E-01	PK2	=	5.92E-04	WKETA	=	2.14E-04
+   205:  + LKETA	=	-1.51E-02	PU0	=	3.36E+00	PUA	=	-1.31E-11
+   206:  + PUB	=	0.00E+00	PVSAT	=	1.25E+03	PETA0	=	1.00E-04
+   207:  + PKETA	=	6.45E-04	KF	=	4.46E-29			
+   208:  								
+   209:  .MODEL PMOS PMOS  								
+   210:  + VERSION	=	3.1						
+   211:  + LEVEL	=	49	NOIMOD	=	1			
+   212:  + TNOM	=	2.70E+01	TOX	=	'4.1E-9/proc_delta'	XJ	=	1.00E-07
+   213:  + NCH	=	4.12E+17	VTH0	=	'-0.39-vt_shift'	K1	=	5.50E-01
+   214:  + K2	=	3.50E-02	K3	=	0.00E+00	K3B	=	1.20E+01
+   215:  + W0	=	1.00E-06	NLX	=	1.25E-07	DVT0W	=	0.00E+00
+   216:  + DVT1W	=	0.00E+00	DVT2W	=	0.00E+00	DVT0	=	5.53E-01
+   217:  + DVT1	=	2.46E-01	DVT2	=	1.00E-01	U0	=	'110*proc_delta*proc_delta'
+   218:  + UA	=	1.44E-09	UB	=	2.29E-21	UC	=	-1.00E-10
+   219:  + VSAT	=	1.95E+05	A0	=	1.72E+00	AGS	=	3.80E-01
+   220:  + B0	=	5.87E-07	B1	=	1.44E-06	KETA	=	2.21E-02
+   221:  + A1	=	4.66E-01	A2	=	3.00E-01	RDSW	=	3.11E+02
+   222:  + PRWG	=	5.00E-01	PRWB	=	1.64E-02	WR	=	1.00E+00
+   223:  + WINT	=	0.00E+00	LINT	=	2.00E-08	XL	=	-2.00E-08
+   224:  + XW	=	-1.00E-08	DWG	=	-3.49E-08	DWB	=	1.22E-09
+   225:  + VOFF	=	-9.80E-02	NFACTOR	=	2.00E+00	CIT	=	0.00E+00
+   226:  + CDSC	=	2.40E-04	CDSCD	=	0.00E+00	CDSCB	=	0.00E+00
+   227:  + ETA0	=	1.12E-03	ETAB	=	-4.79E-04	DSUB	=	1.60E-03
+   228:  + PCLM	=	1.50E+00	PDIBLC1	=	3.00E-02	PDIBLC2	=	-1.01E-05
+   229:  + PDIBLCB	=	1.00E-01	DROUT	=	1.56E-03	PSCBE1	=	4.91E+09
+   230:  + PSCBE2	=	1.64E-09	PVAG	=	3.48E+00	DELTA	=	1.00E-02
+   231:  + RSH	=	7.69E+00	MOBMOD	=	1.00E+00	PRT	=	0.00E+00
+   232:  + UTE	=	-1.49E+00	KT1	=	-1.09E-01	KT1L	=	0.00E+00
+   233:  + KT2	=	2.18E-02	UA1	=	4.27E-09	UB1	=	-7.68E-18
+   234:  + UC1	=	-5.57E-11	AT	=	3.31E+04	WL	=	0.00E+00
+   235:  + WLN	=	1.00E+00	WW	=	0.00E+00	WWN	=	1.00E+00
+   236:  + WWL	=	0.00E+00	LL	=	0.00E+00	LLN	=	1.00E+00
+   237:  + LW	=	0.00E+00	LWN	=	1.00E+00	LWL	=	0.00E+00
+   238:  + CAPMOD	=	2.00E+00	XPART	=	5.00E-01	CGDO	=	6.88E-10
+   239:  + CGSO	=	6.85E-10	CGBO	=	1.00E-12	CJ	=	'1.2e-3/proc_delta'
+   240:  + PB	=	8.70E-01	MJ	=	4.20E-01	CJSW	=	'2.4e-10/proc_delta'
+   241:  + PBSW	=	8.00E-01	MJSW	=	3.57E-01	CJSWG	=	4.24E-10
+   242:  + PBSWG	=	8.00E-01	MJSWG	=	3.56E-01	CF	=	0.00E+00
+   243:  + PVTH0	=	3.53E-03	PRDSW	=	1.02E+01	PK2	=	3.35E-03
+   244:  + WKETA	=	3.52E-02	LKETA	=	-2.06E-03	PU0	=	-2.19E+00
+   245:  + PUA	=	-7.63E-11	PUB	=	9.91E-22	PVSAT	=	5.00E+01
+   246:  + PKETA	=	-6.41E-03	KF	=	1.29E-29	PETA0	=	7.31E-05
    247:  
-   248:  !!!!!!!!!!!!!!!!!!!!!!
-   249:  !!!!! Photodiode !!!!!
-   250:  !!!!!!!!!!!!!!!!!!!!!!
-   251:  XPD Vdd N1 PhotoDiode
-   252:  
-   253:  
-   254:  !!!!!!!!!!!!!!!!!!
-   255:  !!!!! Expose !!!!!
-   256:  !!!!!!!!!!!!!!!!!!
-   257:  M1 N1 EXPOSE N2 Vss NMOS L=L W=W1
-   258:  
-   259:  
-   260:  !!!!!!!!!!!!!!!!!!!
-   261:  !!!!! N2 Node !!!!!
-   262:  !!!!!!!!!!!!!!!!!!!
+   248:  *end of: p18_model_card.inc
+   249:  *end of: ./p18_cmos_models_tt.inc
+   250:  
+   251:  
+   252:  !!!!!!!!!!!!!!!!!!!!!!
+   253:  !!!!! Photodiode !!!!!
+   254:  !!!!!!!!!!!!!!!!!!!!!!
+   255:  XPD Vdd N1 PhotoDiode !Ipd={I_PD}
+   256:  
+   257:  
+   258:  !!!!!!!!!!!!!!!!!!
+   259:  !!!!! Expose !!!!!
+   260:  !!!!!!!!!!!!!!!!!!
+   261:  M1 N1 EXPOSE N2 Vss NMOS L=L W=W1
+   262:  
    263:  
-   264:  ! Erase part
-   265:  M2 N2 ERASE Vss Vss NMOS L=L W=W2
-   266:  
-   267:  ! Sampleling caps
-   268:  CS N2 Vss cs_size
-   269:  
-   270:  ! M3 Transistor
-   271:  M3 Vss N2 N3 Vdd PMOS L=L W=W3
-   272:  
+   264:  !!!!!!!!!!!!!!!!!!!
+   265:  !!!!! N2 Node !!!!!
+   266:  !!!!!!!!!!!!!!!!!!!
+   267:  
+   268:  ! Erase part
+   269:  M2 N2 ERASE Vss Vss NMOS L=L W=W2
+   270:  
+   271:  ! Sampleling caps
+   272:  CS N2 Vss cs_size
    273:  
-   274:  !!!!!!!!!!!!!!!!!!!
-   275:  !!!!! N3 Node !!!!!
-   276:  !!!!!!!!!!!!!!!!!!!
+   274:  ! M3 Transistor
+   275:  M3 Vss N2 N3 Vdd PMOS L=L W=W3
+   276:  
    277:  
-   278:  ! Out transistor
-   279:  M4 N3 NRE Out Vdd PMOS L=L W=W4
-   280:  
-   281:  .ends
-   282:  *end of: ./models/Pixel.cir
-   283:  
-   284:  ! Pixels follow matrix format
-   285:  XP11 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL
-   286:  XP12 1 0 EXPOSE ERASE NRE_R1 OUT2 OUT_SAMPLED2 PIXEL
-   287:  XP21 1 0 EXPOSE ERASE NRE_R2 OUT1 OUT_SAMPLED3 PIXEL
-   288:  XP22 1 0 EXPOSE ERASE NRE_R2 OUT2 OUT_SAMPLED4 PIXEL
-   289:  
-   290:  ! Do a transient analysis
-   291:  .tran 5u 12m 0 10u
-   292:  
-   293:  ! Plot the voltages
-   294:  .plot V(OUT1) V(OUT2) ! signals going to ADC
-   295:  .plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
-   296:  .plot V(OUT_SAMPLED1) V(OUT_SAMPLED2) V(OUT_SAMPLED3) V(OUT_SAMPLED4)
-   297:  
-
-***************************  Model Parameters  ****************************
-
-
-***************  Device Parameters (Only for .op analysis)  ***************
+   278:  !!!!!!!!!!!!!!!!!!!
+   279:  !!!!! N3 Node !!!!!
+   280:  !!!!!!!!!!!!!!!!!!!
+   281:  
+   282:  ! Out transistor
+   283:  M4 N3 NRE Out Vdd PMOS L=L W=W4
+   284:  
+   285:  .ends
+   286:  *end of: ./pixel.cir
+   287:  
+   288:  ! Pixels follow matrix format
+   289:  XP11 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL I_PD=Ipd_11
+   290:  XP12 1 0 EXPOSE ERASE NRE_R1 OUT2 OUT_SAMPLED2 PIXEL I_PD=Ipd_12
+   291:  XP21 1 0 EXPOSE ERASE NRE_R2 OUT1 OUT_SAMPLED3 PIXEL I_PD=Ipd_21
+   292:  XP22 1 0 EXPOSE ERASE NRE_R2 OUT2 OUT_SAMPLED4 PIXEL I_PD=Ipd_22
+   293:  
+   294:  ! Do a transient analysis
+   295:  .tran 5u 12m 0 10u
+   296:  
+   297:  ! Plot the voltages
+   298:  .plot V(OUT1) V(OUT2) ! signals going to ADC
+   299:  .plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
+   300:  .plot V(OUT_SAMPLED1) V(OUT_SAMPLED2) V(OUT_SAMPLED3) V(OUT_SAMPLED4)
 
 
+******************************  Simulation Statistics  ******************************
 
-**************************  Analysis Parameters  **************************
-
-	Stepsize ............ : 5u
-	Final time .......... : 12m
-	Display start time .. : 0
-	Maximum step size ... : 10u
-	Use Initial Conditions: Off
-
-
-
-**************  Options (Only those different from default)  **************
-
-
-
-*************************  Simulation Statistics  *************************
-
-	Total number of iterations.....................: 2787
-	Number of iterations for transient analysis....: 2757
-	Total number of timepoints.....................: 1297
-	Number of timepoints accepted..................: 1283
+	Total number of iterations.....................: 2808
+	Number of iterations for transient analysis....: 2778
+	Total number of timepoints.....................: 1299
+	Number of timepoints accepted..................: 1285
 	Number of timepoints rejected..................: 14
-	Total analysis time (sec)......................: 4.765
-	Transient analysis time (sec)..................: 4.716
-	Time spent in device loading (sec).............: 4.218
-	Time spent in L-U decomposition (sec)..........: 0.084
+	Total analysis time (sec)......................: 0.088
+	Transient analysis time (sec)..................: 0.087
+	Time spent in device loading (sec).............: 0.062
+	Time spent in L-U decomposition (sec)..........: 0.008
 	Time spent in matrix reordering (sec)..........: 0
-	Time spent in matrix solving (sec).............: 0.07
-	Time spent in transient L-U decomposition (sec): 0.084
-	Time spent in transient matrix solving (sec)...: 0.07
+	Time spent in matrix solving (sec).............: 0.005
+	Time spent in transient L-U decomposition (sec): 0.008
+	Time spent in transient matrix solving (sec)...: 0.005
 
-***************************  Kernel Messages  *****************************
+
+********************************  Kernel Messages  **********************************
 
 Circuit: * This is a parametrized testbench for your pixel circuit array
 
