@@ -23,7 +23,7 @@ ylabel('V_{erease} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
 %%
-%First plot pane
+%Second plot pane
 subplot(5, 1, 2);
 plot(t*1e3, v_expose, 'r', 'linewidth', 1.5);
 axis([0 12 -0.5 2]);
@@ -32,7 +32,7 @@ ylabel('V_{expose} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
 %%
-%First plot pane
+%Fourth plot pane
 subplot(5, 1, 4);
 plot(t*1e3, v_nre1r1, 'r', 'linewidth', 1.5);
 axis([0 12 -0.5 2]);
@@ -41,7 +41,7 @@ ylabel('V_{nre1r1} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
 %%
-%First plot pane
+%Fifth plot pane
 subplot(5, 1, 5);
 plot(t*1e3, vout, 'r', 'linewidth', 1.5);
 axis([0 12 0 2]);
@@ -50,7 +50,7 @@ ylabel('V_{out} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
 %%
-%First plot pane
+%Third plot pane
 subplot(5, 1, 3);
 plot(t*1e3, vout_sampled, 'r', 'linewidth', 1.5);
 axis([0 12 -0.5 1.5]);
