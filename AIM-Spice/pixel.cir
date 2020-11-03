@@ -13,7 +13,7 @@
 .param  WL4     = 3     ! M4 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
 
 ! Convertion between NMOS and PMOS
-.param NtoPMOS  = 3
+.param NtoPMOS  = {27 / 7}
 
 ! Size of sampeling capacitor
 .param cs_size  = 2pf

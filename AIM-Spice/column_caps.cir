@@ -5,7 +5,7 @@
 .param  WL      = 3     ! M1 NMOS gate width factor
 
 ! Convertion between NMOS and PMOS
-.param NtoPMOS  = 3
+.param NtoPMOS  = {27 / 7}
 
 .param W   = {WL * L * NtoPMOS}   ! Actual width
 

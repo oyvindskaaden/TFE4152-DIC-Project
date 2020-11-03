@@ -5,7 +5,7 @@
 
 *************************************************************************************
 
-	Date: Tue Nov  3 12:29:35 2020
+	Date: Tue Nov  3 12:39:05 2020
 	Circuit File: Testbench.cir
 
 *******************************  Circuit Description  *******************************
@@ -256,7 +256,7 @@
    244:  .param  WL4     = 3     ! M4 PMOS gate width factor, this is also multiplied with convertion from nmos to pmos
    245:  
    246:  ! Convertion between NMOS and PMOS
-   247:  .param NtoPMOS  = 3
+   247:  .param NtoPMOS  = {27 / 7}
    248:  
    249:  ! Size of sampeling capacitor
    250:  .param cs_size  = 2pf
@@ -314,7 +314,7 @@
    302:  .param  WL      = 3     ! M1 NMOS gate width factor
    303:  
    304:  ! Convertion between NMOS and PMOS
-   305:  .param NtoPMOS  = 3
+   305:  .param NtoPMOS  = {27 / 7}
    306:  
    307:  .param W   = {WL * L * NtoPMOS}   ! Actual width
    308:  
@@ -354,19 +354,19 @@
 
 ******************************  Simulation Statistics  ******************************
 
-	Total number of iterations.....................: 2941
-	Number of iterations for transient analysis....: 2917
-	Total number of timepoints.....................: 1332
-	Number of timepoints accepted..................: 1304
-	Number of timepoints rejected..................: 28
-	Total analysis time (sec)......................: 0.091
-	Transient analysis time (sec)..................: 0.09
-	Time spent in device loading (sec).............: 0.059
-	Time spent in L-U decomposition (sec)..........: 0.007
+	Total number of iterations.....................: 2935
+	Number of iterations for transient analysis....: 2911
+	Total number of timepoints.....................: 1329
+	Number of timepoints accepted..................: 1302
+	Number of timepoints rejected..................: 27
+	Total analysis time (sec)......................: 0.094
+	Transient analysis time (sec)..................: 0.093
+	Time spent in device loading (sec).............: 0.06
+	Time spent in L-U decomposition (sec)..........: 0.009
 	Time spent in matrix reordering (sec)..........: 0
-	Time spent in matrix solving (sec).............: 0.003
-	Time spent in transient L-U decomposition (sec): 0.007
-	Time spent in transient matrix solving (sec)...: 0.003
+	Time spent in matrix solving (sec).............: 0.005
+	Time spent in transient L-U decomposition (sec): 0.009
+	Time spent in transient matrix solving (sec)...: 0.005
 
 
 ********************************  Kernel Messages  **********************************
