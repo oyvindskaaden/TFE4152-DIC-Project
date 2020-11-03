@@ -1,0 +1,16 @@
+.subckt COLCAPS Vdd Vss Out
+
+! Transistor sizes
+.param  L       = 0.4u  ! Standard gate length
+.param  WL      = 3     ! M1 NMOS gate width factor
+
+! Convertion between NMOS and PMOS
+.param NtoPMOS  = 3
+
+.param W   = {WL * L * NtoPMOS}   ! Actual width
+
+! Actual circuit
+MC1 Out Out Vdd Vdd PMOS L=L W=W
+CC1 Out Vss 3pf
+
+.ends
