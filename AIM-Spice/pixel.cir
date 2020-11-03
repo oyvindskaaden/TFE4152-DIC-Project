@@ -24,23 +24,12 @@
 .param W3   = {WL3 * L * NtoPMOS}   ! M3, PMOS
 .param W4   = {WL4 * L * NtoPMOS}   ! M4, PMOS
 
-.param Ipd = {I_PD}
-
-!!!!!!!!!!!!!!!!!!!!
-!!!!! Includes !!!!!
-!!!!!!!!!!!!!!!!!!!!
-
-! Photodiode
-.include ./photodiode.cir
-! Transistors
-.include ./p18_model_card.inc
-.include ./p18_cmos_models_tt.inc
-
+!.param Ipd = {I_PD}
 
 !!!!!!!!!!!!!!!!!!!!!!
 !!!!! Photodiode !!!!!
 !!!!!!!!!!!!!!!!!!!!!!
-XPD Vdd N1 PhotoDiode !Ipd={I_PD}
+XPD Vdd N1 PhotoDiode Ipd={I_PD}
 
 
 !!!!!!!!!!!!!!!!!!
