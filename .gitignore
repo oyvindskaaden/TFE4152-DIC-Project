@@ -2,3 +2,6 @@
 # AIM-Spice files
 **.log
 **.out
+
+# Code ignore
+*.code-workspace
