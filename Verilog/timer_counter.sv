@@ -3,7 +3,7 @@ module timer_counter (
 	input logic setTime,
 	input logic enable,
 	input logic [4:0] init,
-	output wire exposure_done 
+	output wire ex_done 
 );
 
 	logic [4:0] internal_count;
@@ -14,7 +14,7 @@ module timer_counter (
 		else if (enable && (internal_count > 0))
 			internal_count = internal_count-1;
 
-		assign exposure_done = (internal_count == 5'b0) ? 1 : 0;
+		assign ex_done = (internal_count == 5'b0) ? 1 : 0;
 
 endmodule
 
@@ -23,10 +23,10 @@ endmodule
 module timer_counter_tb();
 
 	logic clk, setTime, enable;
-	wire exposure_done;
+	wire ex_done;
 	logic [4:0] init;
 
-	timer_counter testbench(clk, setTime, enable, init, exposure_done);
+	timer_counter testbench(clk, setTime, enable, init, ex_done);
 
 
 	always begin
@@ -43,7 +43,7 @@ module timer_counter_tb();
 		#2 {enable, setTime} = 2'b10;
 	end
 
-	always @(posedge exposure_done) begin
+	always @(posedge ex_done) begin
 		#2 {enable, setTime} = 2'b00;
 		#4 {enable, setTime} = 2'b01;
 		#4 $finish;

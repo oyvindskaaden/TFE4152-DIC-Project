@@ -1,5 +1,5 @@
 $date
-	Sun Nov 15 11:24:17 2020
+	Sun Nov 15 13:43:54 2020
 $end
 $version
 	Icarus Verilog
@@ -8,7 +8,7 @@ $timescale
 	1s
 $end
 $scope module timer_counter_tb $end
-$var wire 1 ! exposure_done $end
+$var wire 1 ! ex_done $end
 $var reg 1 " clk $end
 $var reg 1 # enable $end
 $var reg 5 $ init [4:0] $end
@@ -18,7 +18,7 @@ $var wire 1 " clk $end
 $var wire 1 # enable $end
 $var wire 5 & init [4:0] $end
 $var wire 1 % setTime $end
-$var wire 1 ! exposure_done $end
+$var wire 1 ! ex_done $end
 $var reg 5 ' internal_count [4:0] $end
 $upscope $end
 $upscope $end
