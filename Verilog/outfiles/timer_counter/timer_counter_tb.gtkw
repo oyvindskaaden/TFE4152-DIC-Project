@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Sun Nov 15 11:30:02 2020
+[*]
+[dumpfile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/timer_counter/timer_counter_tb.vcd"
+[dumpfile_mtime] "Sun Nov 15 11:25:49 2020"
+[dumpfile_size] 908
+[savefile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/timer_counter/timer_counter_tb.gtkw"
+[timestart] 0
+[size] 3718 2032
+[pos] -1 -1
+*-2.144694 -1 2 24 30 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 358
+[signals_width] 238
+[sst_expanded] 1
+[sst_vpaned_height] 623
+@28
+timer_counter_tb.clk
+timer_counter_tb.enable
+timer_counter_tb.setTime
+timer_counter_tb.exposure_done
+@24
+timer_counter_tb.init[4:0]
+[pattern_trace] 1
+[pattern_trace] 0
