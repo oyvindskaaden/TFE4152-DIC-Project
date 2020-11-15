@@ -15,6 +15,7 @@ module timer_counter (
 			internal_count = internal_count-1;
 
 		assign exposure_done = (internal_count == 5'b0) ? 1 : 0;
+
 endmodule
 
 
@@ -33,7 +34,7 @@ module timer_counter_tb();
 	end
 
 	initial begin
-		$dumpfile("outfiles/timer_counter_tb.vcd");
+		$dumpfile("outfiles/timer_counter/timer_counter_tb.vcd");
 		$dumpvars();
 
 		{clk, enable, setTime} = 3'b100;
