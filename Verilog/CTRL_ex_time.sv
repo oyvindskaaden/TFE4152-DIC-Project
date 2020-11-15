@@ -33,7 +33,7 @@ module CTRL_ex_time_tb();
   end
 
   initial begin
-    $dumpfile("outfiles/CTRL_ex_time/CTRL_ex_time_tb.vcd"
+    $dumpfile("outfiles/CTRL_ex_time/CTRL_ex_time_tb.vcd");
 
     {clk, reset, ex_increase, ex_decrease} = 4'b1000; // Start with clock on
 
