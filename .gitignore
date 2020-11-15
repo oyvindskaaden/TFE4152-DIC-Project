@@ -5,3 +5,6 @@
 
 # Code ignore
 *.code-workspace
+
+# Verilog outfiles
+*.o
