@@ -28,15 +28,15 @@ module FSM_ex_control(
       current_state = ILLEGAL;
     
     case (current_state)
-      0: begin
+      IDLE: begin
         {ex_start, ex_set} = 2'b01;
         {nre1, nre2, adc, expose, erase} = 5'b11001;
       end
-      1: begin
+      EXPOSURE: begin
         {ex_start, ex_set} = 2'b10;
         {nre1, nre2, adc, expose, erase} = 5'b11010;
       end
-      2: begin
+      READOUT: begin
         if (reset) begin
           current_state = IDLE;
           {nre1, nre2, adc, expose, erase} = 5'b11001;
@@ -62,7 +62,7 @@ module FSM_ex_control(
 
         read_state++;
       end
-      3: begin
+      ILLEGAL: begin
         current_state = IDLE;
         {ex_start, ex_set} = 2'b01;
         {nre1, nre2, adc, expose, erase} = 5'b11001;
