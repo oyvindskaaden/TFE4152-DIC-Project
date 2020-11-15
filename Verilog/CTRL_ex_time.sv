@@ -1,9 +1,9 @@
 module CTRL_ex_time(
-	input logic clk,
-	input logic reset,
-	input logic ex_increase,
-	input logic ex_decrease,
-	output logic [4:0] init
+	input 	logic 				clk,
+	input 	logic 				reset,
+	input 	logic 				ex_increase,
+	input 	logic 				ex_decrease,
+	output 	logic [4:0] 	init
 );
 
 	always @(posedge clk)

@@ -1,9 +1,9 @@
 module timer_counter (
-	input logic clk,
-	input logic setTime,
-	input logic enable,
-	input logic [4:0] init,
-	output wire ex_done 
+	input 	logic					clk,
+	input 	logic 				setTime,
+	input 	logic 				enable,
+	input 	logic [4:0] 	init,
+	output	wire 					ex_done 
 );
 
 	logic [4:0] internal_count;
