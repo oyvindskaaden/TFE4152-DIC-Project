@@ -1,9 +1,9 @@
 module timer_counter (
-	input 	logic					clk,
-	input 	logic 				ex_set,
-	input 	logic 				enable,
-	input 	logic [4:0] 	init,
-	output	wire 					ex_done 
+	input logic clk,
+	input logic ex_set,
+	input logic enable,
+	input logic [4:0] init,
+	output wire ex_done 
 );
 
 	logic [4:0] internal_count;
@@ -35,7 +35,7 @@ module timer_counter_tb();
 
 	initial begin
 		$dumpfile("outfiles/timer_counter/timer_counter_tb.vcd");
-		$dumpvars();
+		//$dumpvars();
 
 		{clk, enable, ex_set} = 3'b100;
 		init = 5'd10;
