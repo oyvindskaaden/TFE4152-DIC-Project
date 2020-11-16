@@ -1,0 +1,36 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Mon Nov 16 15:02:04 2020
+[*]
+[dumpfile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/FSM_ex_control/FSM_ex_control_tb.vcd"
+[dumpfile_mtime] "Mon Nov 16 13:56:14 2020"
+[dumpfile_size] 1023
+[savefile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/FSM_ex_control/FSM_ex_control_tb.gtkw"
+[timestart] 0
+[size] 3702 2016
+[pos] -1 -1
+*-2.892884 0 2 6 16 32 34 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] FSM_ex_control_tb.
+[sst_width] 358
+[signals_width] 334
+[sst_expanded] 1
+[sst_vpaned_height] 615
+@28
+FSM_ex_control_tb.testbench.clk
+FSM_ex_control_tb.testbench.init
+FSM_ex_control_tb.testbench.reset
+@24
+FSM_ex_control_tb.testbench.current_state[1:0]
+@22
+FSM_ex_control_tb.testbench.read_state[3:0]
+@28
+FSM_ex_control_tb.testbench.ex_set
+FSM_ex_control_tb.testbench.ex_start
+FSM_ex_control_tb.testbench.ex_done
+FSM_ex_control_tb.testbench.nre1
+FSM_ex_control_tb.testbench.nre2
+FSM_ex_control_tb.testbench.adc
+FSM_ex_control_tb.testbench.expose
+FSM_ex_control_tb.testbench.erase
+[pattern_trace] 1
+[pattern_trace] 0

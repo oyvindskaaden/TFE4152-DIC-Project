@@ -1,0 +1,158 @@
+$date
+	Mon Nov 16 14:56:14 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module FSM_ex_control_tb $end
+$scope module testbench $end
+$var wire 1 ! clk $end
+$var wire 1 " ex_done $end
+$var wire 1 # init $end
+$var wire 1 $ reset $end
+$var reg 1 % adc $end
+$var reg 2 & current_state [1:0] $end
+$var reg 1 ' erase $end
+$var reg 1 ( ex_set $end
+$var reg 1 ) ex_start $end
+$var reg 1 * expose $end
+$var reg 1 + nre1 $end
+$var reg 1 , nre2 $end
+$var reg 4 - read_state [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 -
+1,
+1+
+0*
+0)
+1(
+1'
+b0 &
+0%
+0$
+0#
+0"
+1!
+$end
+#1
+0!
+#2
+b0 &
+1!
+1$
+#3
+0!
+#4
+1!
+0$
+#5
+0!
+#6
+1*
+0'
+1)
+0(
+b1 &
+1!
+1#
+#7
+0!
+#8
+1!
+0#
+#9
+0!
+#10
+1!
+#11
+0!
+#12
+1!
+#13
+0!
+#14
+1!
+#15
+0!
+#16
+b1 -
+0*
+b10 &
+0)
+1!
+1"
+#17
+0!
+#18
+b10 -
+0+
+1!
+0"
+#19
+0!
+#20
+b11 -
+1%
+1!
+#21
+0!
+#22
+b100 -
+0%
+1!
+#23
+0!
+#24
+b101 -
+1+
+1!
+#25
+0!
+#26
+b110 -
+0,
+1!
+#27
+0!
+#28
+b111 -
+1%
+1!
+#29
+0!
+#30
+b1000 -
+0%
+1!
+#31
+0!
+#32
+b1001 -
+b0 &
+1,
+1!
+#33
+0!
+#34
+1'
+1(
+1!
+#35
+0!
+#36
+1!
+#37
+0!
+#38
+1!
+#39
+0!
+#40
+1!
