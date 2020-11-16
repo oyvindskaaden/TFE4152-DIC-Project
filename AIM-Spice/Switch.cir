@@ -17,4 +17,4 @@ MN1 1 2 0 0 NMOS L=L W=W
 .plot gm(MN1)
 
 .include p18_model_card.inc
-.include p18_cmos_models_ss.inc
+.include p18_cmos_models_tt.inc
