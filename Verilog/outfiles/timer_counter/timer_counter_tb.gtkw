@@ -1,25 +1,27 @@
 [*]
 [*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
-[*] Sun Nov 15 11:30:02 2020
+[*] Mon Nov 16 15:05:21 2020
 [*]
 [dumpfile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/timer_counter/timer_counter_tb.vcd"
-[dumpfile_mtime] "Sun Nov 15 11:25:49 2020"
-[dumpfile_size] 908
+[dumpfile_mtime] "Mon Nov 16 15:01:51 2020"
+[dumpfile_size] 760
 [savefile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/timer_counter/timer_counter_tb.gtkw"
 [timestart] 0
-[size] 3718 2032
+[size] 3702 2016
 [pos] -1 -1
-*-2.144694 -1 2 24 30 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-2.684351 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] timer_counter_tb.
 [sst_width] 358
-[signals_width] 238
+[signals_width] 361
 [sst_expanded] 1
-[sst_vpaned_height] 623
+[sst_vpaned_height] 601
 @28
-timer_counter_tb.clk
-timer_counter_tb.enable
-timer_counter_tb.setTime
-timer_counter_tb.exposure_done
+timer_counter_tb.testbench.clk
+timer_counter_tb.testbench.ex_start
+timer_counter_tb.testbench.ex_set
+@22
+timer_counter_tb.testbench.init[4:0]
 @24
-timer_counter_tb.init[4:0]
+timer_counter_tb.testbench.internal_count[4:0]
 [pattern_trace] 1
 [pattern_trace] 0

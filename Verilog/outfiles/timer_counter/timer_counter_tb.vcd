@@ -1,5 +1,5 @@
 $date
-	Sun Nov 15 16:29:14 2020
+	Mon Nov 16 16:01:51 2020
 $end
 $version
 	Icarus Verilog
@@ -8,117 +8,111 @@ $timescale
 	1s
 $end
 $scope module timer_counter_tb $end
-$var wire 1 ! ex_done $end
-$var reg 1 " clk $end
-$var reg 1 # enable $end
-$var reg 1 $ ex_set $end
-$var reg 5 % init [4:0] $end
 $scope module testbench $end
-$var wire 1 " clk $end
-$var wire 1 # enable $end
-$var wire 1 $ ex_set $end
-$var wire 5 & init [4:0] $end
-$var wire 1 ! ex_done $end
-$var reg 5 ' internal_count [4:0] $end
+$var wire 1 ! clk $end
+$var wire 1 " ex_set $end
+$var wire 1 # ex_start $end
+$var wire 5 $ init [4:0] $end
+$var wire 1 % ex_done $end
+$var reg 5 & internal_count [4:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx '
-b1010 &
-b1010 %
-0$
+bx &
+x%
+b1010 $
 0#
-1"
-x!
+0"
+1!
 $end
 #1
-0"
-#2
 0!
-b1011 '
-1"
-1$
-#3
-0"
-#4
-b1010 '
-1"
-1#
-0$
-#5
-0"
-#6
-b1001 '
-1"
-#7
-0"
-#8
-b1000 '
-1"
-#9
-0"
-#10
-b111 '
-1"
-#11
-0"
-#12
-b110 '
-1"
-#13
-0"
-#14
-b101 '
-1"
-#15
-0"
-#16
-b100 '
-1"
-#17
-0"
-#18
-b11 '
-1"
-#19
-0"
-#20
-b10 '
-1"
-#21
-0"
-#22
-b1 '
-1"
-#23
-0"
-#24
+#2
+0%
+b1011 &
 1!
-b0 '
 1"
-#25
+#3
+0!
+#4
+b1010 &
+1!
+1#
 0"
+#5
+0!
+#6
+b1001 &
+1!
+#7
+0!
+#8
+b1000 &
+1!
+#9
+0!
+#10
+b111 &
+1!
+#11
+0!
+#12
+b110 &
+1!
+#13
+0!
+#14
+b101 &
+1!
+#15
+0!
+#16
+b100 &
+1!
+#17
+0!
+#18
+b11 &
+1!
+#19
+0!
+#20
+b10 &
+1!
+#21
+0!
+#22
+b1 &
+1!
+#23
+0!
+#24
+1%
+b0 &
+1!
+#25
+0!
 #26
-1"
+1!
 0#
 #27
-0"
-#28
-1"
-#29
-0"
-#30
 0!
-b1011 '
+#28
+1!
+#29
+0!
+#30
+0%
+b1011 &
+1!
 1"
-1$
 #31
-0"
+0!
 #32
-1"
+1!
 #33
-0"
+0!
 #34
-1"
+1!
