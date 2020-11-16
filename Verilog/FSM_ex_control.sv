@@ -14,13 +14,13 @@ module FSM_ex_control(
   output logic erase
 );
 
-  enum {IDLE, EXPOSURE, READOUT, ILLEGAL} current_state;
+  enum logic [1:0] {IDLE, EXPOSURE, READOUT, ILLEGAL} current_state;
 
   logic [3:0] read_state = 0;
 
   always @(posedge clk) begin
 
-    if (init && current_state == 0)begin
+    if (init && current_state == IDLE)begin
       current_state = EXPOSURE;
     end
 
@@ -35,6 +35,7 @@ module FSM_ex_control(
       EXPOSURE: begin
         {ex_start, ex_set} = 2'b10;
         {nre1, nre2, adc, expose, erase} = 5'b11010;
+        read_state = 0;
       end
       READOUT: begin
         if (reset) begin
@@ -43,7 +44,7 @@ module FSM_ex_control(
         end
           
         
-        expose = 0;
+        {expose, erase} = 2'b00;
         case (read_state)
           0: {nre1, nre2, adc} = 3'b110;
           1: {nre1, nre2, adc} = 3'b010;
@@ -72,8 +73,10 @@ module FSM_ex_control(
 
 
   always @(posedge ex_done)
-    if (current_state == 1)
+    if (current_state == EXPOSURE) begin
+      ex_start = 0;
       current_state = READOUT;
+    end
 
   initial begin
     current_state = IDLE;
@@ -82,3 +85,44 @@ module FSM_ex_control(
   end
 
 endmodule
+
+module FSM_ex_control_tb();
+
+  logic clk, reset, init;
+  logic	ex_done;
+  wire ex_start, ex_set;
+
+  wire nre1, nre2, adc, expose, erase;
+
+  FSM_ex_control testbench(clk, reset, init, ex_done, ex_start, ex_set, nre1, nre2, adc, expose, erase);
+
+
+  always begin
+    #1 clk = !clk;
+  end
+
+  initial begin
+    $dumpfile("outfiles/FSM_ex_control/FSM_ex_control_tb.vcd");
+    $dumpvars(0, testbench);
+
+    {clk, reset, init, ex_done} = 4'b1000;
+
+    #2 reset = 1;
+    #2 reset = 0;
+
+    #2 init = 1;
+    #2 init = 0;
+
+    // Simulate exposure time, set it to exposure time * 2 - 2
+    #8 ex_done = 1;
+    #2 ex_done = 0;
+
+    #20 // Time of readout
+    #2 $finish;
+
+
+  end
+
+
+endmodule
+
