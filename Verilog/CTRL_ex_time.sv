@@ -34,6 +34,7 @@ module CTRL_ex_time_tb();
 
   initial begin
     $dumpfile("outfiles/CTRL_ex_time/CTRL_ex_time_tb.vcd");
+    $dumpvars(0, testbench);
 
     {clk, reset, ex_increase, ex_decrease} = 4'b1000; // Start with clock on
 
