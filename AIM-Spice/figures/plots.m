@@ -4,7 +4,7 @@ clc;
 
 %%
 %Loading datafile and allocating variables
-doc = load('test750_500_250_50@2ms.txt');
+doc = load('./simResults/test750_500_250_50@2ms.txt');
 
 t = doc(:,1);
 v_erease = doc(:,2);
@@ -27,7 +27,6 @@ grid;
 ylabel('V_{erease} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
 %Second plot pane
 subplot(5, 1, 2);
 plot(t*1e3, v_expose, 'r', 'linewidth', 1.5);
@@ -36,10 +35,9 @@ grid;
 ylabel('V_{expose} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
+
 %Third plot pane
 subplot(5, 1, 3);
-
 plot(t*1e3, vout_sampled1, 'r', 'linewidth', 1.5);
 hold on;
 plot(t*1e3, vout_sampled2, 'b', 'linewidth', 1.5);
@@ -52,7 +50,7 @@ grid;
 ylabel('Voltage [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
+
 %Fourth plot pane
 subplot(5, 1, 4);
 plot(t*1e3, v_nrer1, ':r', 'linewidth', 2);
@@ -65,7 +63,7 @@ grid;
 ylabel('Voltage [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
+
 %Fifth plot pane
 subplot(5, 1, 5);
 plot(t*1e3, vout1, ':r', 'linewidth', 2);
@@ -90,7 +88,6 @@ grid;
 ylabel('V_{erease} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
 %Second plot pane
 subplot(5, 1, 2);
 plot(t*1e3, v_expose, 'r', 'linewidth', 1.5);
@@ -99,32 +96,48 @@ grid;
 ylabel('V_{expose} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
-%Fourth plot pane
-subplot(5, 1, 4);
-plot(t*1e3, v_nrer2, 'r', 'linewidth', 1.5);
-axis([0 12 -0.25 2]);
-grid;
-ylabel('V_{nrer2} [V]', 'fontsize', 14);
-xlabel('Time [ms]', 'fontsize', 14);
 
-%%
-%Fifth plot pane
-subplot(5, 1, 5);
-plot(t*1e3, vout2, 'r', 'linewidth', 1.5);
-axis([0 12 1 2]);
-grid;
-ylabel('V_{out2} [V]', 'fontsize', 14);
-xlabel('Time [ms]', 'fontsize', 14);
-
-%%
 %Third plot pane
 subplot(5, 1, 3);
-plot(t*1e3, vout_sampled2, 'r', 'linewidth', 1.5);
+plot(t*1e3, vout_sampled1, 'r', 'linewidth', 1.5);
+hold on;
+plot(t*1e3, vout_sampled2, 'b', 'linewidth', 1.5);
+plot(t*1e3, vout_sampled3, 'g', 'linewidth', 1.5);
+plot(t*1e3, vout_sampled4, 'black', 'linewidth', 1.5);
+hold off;
+legend('Sampled 1', 'Sampled 2', 'Sampled 3', 'Sampled 4');
 axis([0 12 -0.25 1]);
 grid;
-ylabel('V_{out sampled2} [V]', 'fontsize', 14);
+ylabel('Voltage [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
+
+
+%Fourth plot pane
+subplot(5, 1, 4);
+plot(t*1e3, v_nrer1, ':r', 'linewidth', 2);
+hold on;
+plot(t*1e3, v_nrer2, ':b', 'linewidth', 2);
+hold off;
+legend('NRE1','NRE2');
+axis([0 12 -0.25 2]);
+grid;
+ylabel('Voltage [V]', 'fontsize', 14);
+xlabel('Time [ms]', 'fontsize', 14);
+
+
+%Fifth plot pane
+subplot(5, 1, 5);
+plot(t*1e3, vout1, ':r', 'linewidth', 2);
+hold on;
+plot(t*1e3, vout2, ':b',  'linewidth', 2);
+hold off;
+axis([0 12 1 2]);
+legend('Output 1', 'Output 2');
+grid;
+ylabel('Voltage [V]', 'fontsize', 14);
+xlabel('Time [ms]', 'fontsize', 14);
+
+
 
 %%
 %New figure
@@ -139,7 +152,6 @@ xlabel('Time [ms]', 'fontsize', 14);
 xline(1, '--b');
 xline(3.04, '--b','HandleVisibility','off');
 
-%%
 %Second plot pane
 subplot(3, 1, 2);
 plot(t*1e3, v_erease, 'r', 'linewidth', 1.5);
@@ -148,7 +160,6 @@ grid;
 ylabel('V_{erease} [V]', 'fontsize', 14);
 xlabel('Time [ms]', 'fontsize', 14);
 
-%%
 %Third plot pane
 subplot(3,1,3);
 plot(t*1e3, vout_sampled1, 'r', 'linewidth', 1.5);
