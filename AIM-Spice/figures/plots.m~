@@ -160,20 +160,7 @@ gm_TT = doc_TT(:, 3);
 Vgg_SS = doc_SS(:, 2);
 gm_SS = doc_SS(:, 3);
 
-Vgg_FF = doc_FF(:,2);
-gm_FF = doc_FF(:,3);
-
-figure;
-plot(Vgg_TT, gm_TT*1e3, 'linewidth', 1.5);
-hold on;
-plot(Vgg_SS, gm_SS*1e3, 'linewidth', 1.5);
-plot(Vgg_FF, gm_FF*1e3, 'linewidth', 1.5);
-hold off;
-grid;
-legend('TT', 'SS', 'FF');
-title('Process variations of switch');
-ylabel('Transconductance [mS]');
-xlabel('Gate voltage [V]');
+Vgg_FF
 
 
 %%

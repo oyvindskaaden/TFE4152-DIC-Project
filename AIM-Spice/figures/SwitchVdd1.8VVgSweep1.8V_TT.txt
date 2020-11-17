@@ -1,4 +1,4 @@
-vgg (voltage)	vgg (voltage)	gm(mn1) (conductance)
+%vgg (voltage)	vgg (voltage)	gm(mn1) (conductance)
 0.000000e+00	0.000000e+00	3.958217e-10
 1.000000e-02	1.000000e-02	5.190008e-10
 2.000000e-02	2.000000e-02	6.804555e-10
