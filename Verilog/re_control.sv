@@ -1,8 +1,3 @@
-//
-//
-// Top-level verilog module example
-//
-
 `include "CTRL_ex_time.sv"
 `include "FSM_ex_control.sv"
 `include "timer_counter.sv"
