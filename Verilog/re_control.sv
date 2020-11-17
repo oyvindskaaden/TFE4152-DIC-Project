@@ -2,6 +2,7 @@
 `include "FSM_ex_control.sv"
 `include "timer_counter.sv"
 
+// Top level control block
 module re_control(
 	input wire clk,
 	input wire reset,
@@ -17,13 +18,15 @@ module re_control(
   output wire erase
 );
 
+	// Interconnect wires
 	wire ex_done;
 	wire ex_start;
 	wire ex_set;
 
 	wire [4:0] ex_init;
 
-
+	// Lower level blocks with actual logic
+	// Interconnect with wires
 	FSM_ex_control fsm_ex_control(clk, reset, init, ex_done, ex_start, ex_set, nre1, nre2, adc, expose, erase);
 	CTRL_ex_time ctrl_ex_time (clk, reset, ex_increase, ex_decrease, ex_init);
 	timer_counter ex_timer(clk, ex_set, ex_start, ex_init, ex_done);

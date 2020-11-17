@@ -14,6 +14,7 @@ module CTRL_ex_time(
     else if (ex_decrease && !ex_increase && ex_init > 5'd2)
       ex_init <= ex_init - 1; // Decrease if ex_decrease and ex_init > 2
 
+  // Initial value for ex_init
   initial begin
     ex_init <= 5'd16;
   end
