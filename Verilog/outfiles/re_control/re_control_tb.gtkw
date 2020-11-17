@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Tue Nov 17 10:37:25 2020
+[*]
+[dumpfile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/re_control/re_control_tb.vcd"
+[dumpfile_mtime] "Tue Nov 17 10:34:40 2020"
+[dumpfile_size] 2361
+[savefile] "/home/oyvind/repos/TFE4152-DIC-Project/Verilog/outfiles/re_control/re_control_tb.gtkw"
+[timestart] 0
+[size] 3702 2016
+[pos] -1 -1
+*-2.374628 -1 2 6 20 40 60 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] re_control_tb.
+[treeopen] re_control_tb.testbench.
+[sst_width] 358
+[signals_width] 400
+[sst_expanded] 1
+[sst_vpaned_height] 603
+@28
+re_control_tb.testbench.clk
+re_control_tb.testbench.reset
+re_control_tb.testbench.init
+re_control_tb.testbench.ex_increase
+re_control_tb.testbench.ex_decrease
+@24
+re_control_tb.testbench.ex_init[4:0]
+@28
+re_control_tb.testbench.ex_set
+re_control_tb.testbench.ex_start
+re_control_tb.testbench.ex_done
+re_control_tb.testbench.nre1
+re_control_tb.testbench.nre2
+re_control_tb.testbench.adc
+re_control_tb.testbench.expose
+re_control_tb.testbench.erase
+[pattern_trace] 1
+[pattern_trace] 0
