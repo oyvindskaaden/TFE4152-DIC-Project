@@ -8,3 +8,6 @@
 
 # Verilog outfiles
 *.o
+
+# MATLAB
+*.m~
