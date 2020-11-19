@@ -1,0 +1,89 @@
+* This is a parametrized testbench for your pixel circuit array
+
+* You should at least test your circuit with:
+*	- current of 50 pA and exposure time 30 ms
+*	- current of 750 pA and exposure time 2 ms
+
+* Instructions
+* Connect EXPOSE, ERASE, NRE_R1 and NRE_R2 at the right place
+* Run a transient simulation with length 60 ms
+* Make sure outputs of pixel circuits to ADC are called OUT1 and OUT2
+* Make plots of output voltages to ADC (here called OUT1 and OUT2)
+* The voltage across internal capacitor (any pixel) is also of interest (here called OUT_SAMPLED1)
+* You should also plot the control signals EXPOSE, NRE_R1, NRE_R2 and ERASE
+
+!!!!!!!!!!!!!!!!!!!!!!
+!!!!! PARAMETERS !!!!!
+!!!!!!!!!!!!!!!!!!!!!!
+.param Ipd_11       = 750p  ! Photodiode current, range [50 pA, 750 pA]
+.param Ipd_12       = 500p  ! Photodiode current, range [50 pA, 750 pA]
+.param Ipd_21       = 250p  ! Photodiode current, range [50 pA, 750 pA]
+.param Ipd_22       = 50p   ! Photodiode current, range [50 pA, 750 pA]
+.param VDD          = 1.8   ! Supply voltage
+.param EXPOSURETIME = 2m    ! Exposure time, range [2 ms, 30 ms]
+
+! Automaticly calculate all the other parameters 
+.param TRF          = {EXPOSURETIME/100}             ! Risetime and falltime of EXPOSURE and ERASE signals
+.param PW           = {EXPOSURETIME}                 ! Pulsewidth of EXPOSURE and ERASE signals
+.param PERIOD       = {EXPOSURETIME*10}              ! Period for testbench sources
+.param FS           = 1k;                            ! Sampling clock frequency 
+.param CLK_PERIOD   = {1/FS}                         ! Sampling clock period
+.param EXPOSE_DLY   = {CLK_PERIOD}                   ! Delay for EXPOSE signal
+.param NRE_R1_DLY   = {2*CLK_PERIOD + EXPOSURETIME}  ! Delay for NRE_R1 signal
+.param NRE_R2_DLY   = {4*CLK_PERIOD + EXPOSURETIME}  ! Delay for NRE_R2 signal
+.param ERASE_DLY    = {6*CLK_PERIOD + EXPOSURETIME}  ! Delay for ERASE signal
+.param SIM_TIME     = {10*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! Supplies and pulse generation !!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+VDD     1       0 dc VDD                                                            ! General supply
+VEXPOSE EXPOSE  0 dc 0  PULSE(0     VDD  EXPOSE_DLY  TRF TRF EXPOSURETIME PERIOD)   ! Expose pulse, active high
+VERASE  ERASE   0 dc 0  PULSE(0     VDD  ERASE_DLY   TRF TRF CLK_PERIOD   PERIOD)   ! Erase pulse, active high
+VNRE_R1 NRE_R1  0 dc 0  PULSE(VDD   0    NRE_R1_DLY  TRF TRF CLK_PERIOD   PERIOD)   ! NRE_R1 Pulse, active low
+VNRE_R2 NRE_R2  0 dc 0  PULSE(VDD   0    NRE_R2_DLY  TRF TRF CLK_PERIOD   PERIOD)   ! NRE_R2 Pulse, active low
+
+
+!!!!!!!!!!!!!!!!!!!!
+!!!!! Includes !!!!!
+!!!!!!!!!!!!!!!!!!!!
+
+! Photodiode
+.include ./photodiode.cir
+! Transistors
+.include ./p18_model_card.inc
+.include ./p18_cmos_models_tt.inc
+
+! Pixel subcircuit
+! syntax: XPixel VDD(in) VSS(in) EXPOSE(in) ERASE(in) NRE(in) OUT(out) CAP_VOLTAGE(out) PIXEL(name) PARAM: I_PD=VAL
+.include ./pixel.cir
+! Column capacitor
+! syntax: XColCpa VDD(in) VSS(in) COLOUT(out) COLCAPS
+.include ./column_caps.cir
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! Actual Circuit !!!!! 
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Pixels follow matrix format
+XP11 1 0 EXPOSE ERASE NRE_R1 OUT1 OUT_SAMPLED1 PIXEL I_PD=Ipd_11
+XP12 1 0 EXPOSE ERASE NRE_R1 OUT2 OUT_SAMPLED2 PIXEL I_PD=Ipd_12
+XP21 1 0 EXPOSE ERASE NRE_R2 OUT1 OUT_SAMPLED3 PIXEL I_PD=Ipd_21
+XP22 1 0 EXPOSE ERASE NRE_R2 OUT2 OUT_SAMPLED4 PIXEL I_PD=Ipd_22
+
+! Column caps
+XCC1 1 0 OUT1 COLCAPS
+XCC2 1 0 OUT2 COLCAPS
+
+
+!!!!!!!!!!!!!!!!!!!!
+!!!!! Analysis !!!!!
+!!!!!!!!!!!!!!!!!!!!
+! Do a transient analysis
+.tran 5u SIM_TIME 0 10u
+
+! Plot the voltages
+.plot V(OUT1) V(OUT2) ! signals going to ADC
+.plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
+.plot V(OUT_SAMPLED1) V(OUT_SAMPLED2) V(OUT_SAMPLED3) V(OUT_SAMPLED4)

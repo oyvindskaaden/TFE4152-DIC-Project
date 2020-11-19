@@ -1,0 +1,83 @@
+\newpage
+\section{Theory}
+\label{Theroy}
+The objective of this chapter is to introduce the reader to the applied theory that is needed for the implementation of a readout- and controll circuit for a digital camera.
+
+\subsection{Field effect transistors}
+\label{FET}
+Field effect transistors are a fundamental building block of modern electronics design. 
+As they are able to be produced quite small, they are by far the most used components in integrated circuit design. 
+This is also due to the fact that they are versatile and suitable for alot of applications such as signal amplification and digital logic \cite{sedra_smith_2016}.\\
+The most common type of FETs are NMOS and PMOS. 
+These are transistors created by silicone dioxide, where the substrate, two heavily doped regions, and a gate electrode creates the device terminals. 
+For NMOS the substrate is of p-type and the terminals are made up of n-doped regions. 
+The opposite is true for PMOS, n-type substrate and p-doped regions make up the terminals. 
+This similar structure with opposite regions, make the NMOS and PMOS complimentary as the polarities are opposite of eachother \cite{sedra_smith_2016}.
+
+
+\subsubsection{CMOS}
+\label{CMOS}
+Complementary MOS (CMOS) is a technology that uses both NMOS and PMOS transistors to create digital and analog integrated circuits. 
+CMOS is the most widely used IC technology, as it has taken over many applications that for a long time, only were possible by bipolar devices. As well as the previously mentioned versatility \cite{sedra_smith_2016}. 
+
+As mentioned in \cref{FET} transistors are made up of heavily doped regions and a gate electrode. 
+To induce a channel in a PMOS transistor, a negative voltage with a higher magnitude than a threshold needs to be applied to the gate terminal. 
+This forms a current channel between the source and drain terminal \cite{sedra_smith_2016}.\\
+The condition can be described as:
+\begin{equation}
+    |V_{gs}| \geq |V_{t}|
+\end{equation}
+To make a current $i_{D}$ flow between Drain and Source, a negative voltage $v_{DS}$ is connected to the drain terminal \cite{sedra_smith_2016}. \\
+The mobility of the electrons in the channel follow the following relation:
+\begin{gather}
+    \mu_{p}C_{ox}
+    \intertext{And the transconductance parameter of the transistor $k_{p}$, which is proportional to the aspect ratio of the transistor:}
+    k_p = \mu C_{ox} \frac{W}{L}
+\end{gather}
+    
+
+
+
+
+
+\subsection{Process variations}
+\label{proc_var}
+CMOS parameters are highly dependent on the fabrication process. 
+This means that the device properties  will vary with each fabrication, even if the design is identical. 
+The fabrication temperature is a typical parameter which can alter the device performance. 
+Oxide thickness may vary by 5\% and dopant concentrations may vary by 10\%, due to the temperature variations, although efforts are made to reduce them \cite{carusone_johns_martin_johns_2014}. \\
+To compensate for process variations during design, several different device models are used. 
+Corner analysis is used to check how "slow" or "fast" transistors affect the design. 
+Corner types are FF (Fast Fast), SS(Slow Slow), SF(Slow Fast), FS (Fast Slow) and TT(Typical Typical) \cite{carusone_johns_martin_johns_2014}. 
+
+\subsection{CMOS image sensors}
+\label{CMOS_img_sens}
+CMOS has many powerful applications, and one of them is in image sensors \cite{elprocus_2020}. 
+Which is the main objective of the CMOS technology used in this project.
+
+When visible light hits the surface of a doped silicon device, a number of electrons proportional to the flux density of the light and wavelength, is released into the silicon device. 
+This phenomena is used in CMOS image sensors to collect electrical information about the light received on the silicon surface \cite{turchetta_spring_davidson}.
+
+The way a CMOS image sensor is constructed is by a photodiode, i.e. the silicon surface mentioned earlier and a receiving circuit. 
+Here the electrons are firstly stored in a potential well, before either being converted in to a voltage or sent to a  metering register. 
+After this the voltage gets passed to an analog-to-digital converter (ADC), which stores the color and intensity of the light as a discrete value, which can be presented on a digital screen \cite{turchetta_spring_davidson}.
+
+\subsection{SPICE}
+\label{spice}
+Simulation Program with Integrated Circuit Emphasis (SPICE), is a fairly old and open-source simulation language for analog circuits. 
+It was developed in the 70s at Berkeley university in California. 
+Today it is more commonly used for small integrated sub-circuits or discrete circuits, as Very Large Scale Integration (VLSI) requires faster simulation, and SPICE is relatively slow \cite{nagel}.\\
+SPICE is a very powerful simulation tool since it is able to simulate, DC, AC, transient and noise. 
+It is also simple to add device models for specific components. 
+For CMOS designs simulations can be done with all process corners, as circuit performance may vary for the corner types the production has. \cite{nagel}.
+
+\subsection{HDL - Hardware Description Language}
+\label{HDL}
+Since manual design of logic circuits is not feasible for large designs as the complexity becomes incomprehensible, digital designers use computer-aided tools. 
+Hardware Description Language (HDL) is the most common way of designing, as these languages describe the hardware of digital circuits in a textual form. 
+As simulation and verification plays a major role in HDL, the risk of producing a faulty design is significantly reduced \cite{mano_ciletti_2013}.\\
+The way HDL describes a circuit is done implicit by describing the signals and not the actual function, for example the logical output of an AND gate is described by how it is determined by the input \cite{mano_ciletti_2013}.\\
+The most common HDLs are VHDL and verilog, \cite{arar_2017} \cite{steve_2019}. 
+Both of these languages provides the user with a high level description of digital design. 
+The release of verilog 2005, provided a superset of verilog called SystemVerilog \cite{digilent}. 
+The digital design of this project was done using SystemVerilog.

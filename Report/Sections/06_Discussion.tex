@@ -1,0 +1,15 @@
+\section{Discussion}
+\subsection{Analog}
+Although the simulations presented in \cref{Analog_res} seems quite promising. 
+Seeing as the capacitor gets charged at the different voltages under the different simulated lighting conditions. 
+As well as being discharged when the erase transistor gets activated. 
+The circuit has yet to be tested simulated in a mixed signal simulation. 
+The SPICE simulations have "hard" coded control signals to simulate the digital control, meaning that the interface between the two parts has yet to be tested.
+
+\subsubsection{Corner analysis}
+The process variations are not simulated on the complete analog circuit, only on a single NMOS switch. 
+Therefore there is no reason to rule out that process variations may affect the function and performance of the analog circuit.
+
+\subsection{Digital}
+The digital circuit seems to function after the specification, this means that it works under the same timing as the analog circuit does. 
+However since the verilog HDL is only synthesized and simulated in software and has yet to be implemented in hardware, there is no guarantee that a hardware implementation will work as simulated.

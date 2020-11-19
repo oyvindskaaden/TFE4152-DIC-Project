@@ -1,0 +1,93 @@
+% Author - Jon Arnt Kårstad, NTNU IMT
+\documentclass{article}
+
+% Importing settings from our file "setup.sty"
+\usepackage{setup}
+
+% package for acronyms and description of words
+% https://www.overleaf.com/learn/latex/glossaries
+\usepackage[acronym]{glossaries}
+
+\usepackage{cleveref}
+\usepackage{xurl}
+
+\definecolor{code}{HTML}{eeeeee}
+\setminted{mathescape,
+               escapeinside=||,
+               linenos,
+               numbersep=5pt,
+               autogobble,
+               frame=lines,
+               framesep=2mm,
+               bgcolor=code,
+               breaklines=true,
+               }
+
+% Beginning of document
+\begin{document}
+
+% Inserting title page
+\import{./}{title}
+
+
+% Defining front matter settings (Norsk: innstillinger for forord m.m.)
+\frontmatter
+
+\input{Sections/00_Abstract}
+
+% Inserting table of contents
+\tableofcontents
+
+\clearpage
+% Inserting list of figures & list of tables
+\listoffigures
+\listoftables
+
+% Defining main matter settings (Norsk: innstillinger for hoveddelen av teksten)
+\mainmatter
+
+% Introduction explaining this LaTeX-template
+\input{Sections/011_Abbreviations}
+
+\clearpage
+\input{Sections/01_Introduction}
+
+\clearpage
+\input{Sections/02_Theory}
+
+\clearpage
+\input{Sections/03_System_overview}
+
+\clearpage
+\input{Sections/04_Design_process}
+
+\clearpage
+\input{Sections/05_Results}
+
+\clearpage
+\input{Sections/06_Discussion}
+
+\clearpage
+\input{Sections/07_Conclusion}
+
+
+
+% Example section added directly into the main-file
+
+
+% Printing bibliography
+\newpage
+\printbibliography[heading = bibintoc, title = Bibliography]    % 'bibintoc' inserts our bibliography into the table of contents
+
+% Inserting appendix with separate settings
+\addappendix
+\import{./Appendices/}{figures}
+\clearpage
+\import{./Appendices/}{analog}
+\clearpage
+\import{./Appendices/}{digital}
+\clearpage
+\import{./Appendices/}{other}
+
+% End of document
+\end{document}
